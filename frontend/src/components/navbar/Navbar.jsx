@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { Button } from "@mui/material/Button";
+import Button from '@mui/material/Button';
 import Person2Icon from '@mui/icons-material/Person2';
 import { useNavigate } from 'react-router-dom';
 

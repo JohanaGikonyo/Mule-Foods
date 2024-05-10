@@ -65,18 +65,18 @@ function Login() {
             const response = await axios.post('https://mule-foods.onrender.com/api/login', {
                 phone
             })
-            if (response.data === "exists") {
-                setCircularProgress(prev => !prev)
-                localStorage.setItem('token', response.data.token);
-                setSuccessAlert(prev => !prev)
-                handleSetUser();
-            }
-            else {
-
+            if (response.data === "does not exists") {
                 setCircularProgress(prev => !prev)
 
                 console.log("The user does not Exists. Please SignIn")
                 setFailAlert(prev => !prev)
+            }
+            else {
+                setCircularProgress(prev => !prev)
+                localStorage.setItem('token', response.data.token);
+                setSuccessAlert(prev => !prev)
+                handleSetUser();
+
             }
         }
 
@@ -120,7 +120,7 @@ function Login() {
                     sx={{ width: '100%' }}
                 >
                     <AlertTitle>Failed</AlertTitle>
-                    Failed! Try to SignIn.
+                    Failed! Try to LogIn.
                 </Alert>
             </Snackbar>
             <form action="" className='flex flex-col justify-around items-center gap-4  p-2  rounded-md text-slate-700' onSubmit={handleSubmit}>

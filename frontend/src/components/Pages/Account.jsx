@@ -9,7 +9,7 @@ import Alert from '@mui/material/Alert';
 import axios from 'redaxios'
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
-function SignIn() {
+function Account() {
     const [phone, setPhone] = useState()
     const [location, setLocation] = useState("")
     const [circularProgress, setCircularProgress] = useState(false)
@@ -43,7 +43,7 @@ function SignIn() {
         e.preventDefault();
         setCircularProgress(prev => !prev)
         try {
-            const response = await axios.patch(`http://localhost:3000/api/update/${phone}`, {
+            const response = await axios.patch(`https://mule-foods.onrender.com/api/update/${phone}`, {
                 location
             })
             if (response.data === "success") {
@@ -68,11 +68,11 @@ function SignIn() {
     const handleSuccessClose = () => {
 
         setSuccessAlert(prev => !prev);
-        history('/home')
+        history('/mainpage/confirm')
     }
     const handleFailClose = () => {
         setFailAlert(prev => !prev);
-        history('/help')
+        history('/mainpage/help')
 
     }
 
@@ -87,7 +87,7 @@ function SignIn() {
                     }
                 >
                     <AlertTitle>Successs</AlertTitle>
-                    Successfully Registered!
+                    Successfully Updated!
                 </Alert >
             </Snackbar >
 
@@ -143,4 +143,4 @@ function SignIn() {
     )
 }
 
-export default SignIn
+export default Account

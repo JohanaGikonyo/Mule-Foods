@@ -62,7 +62,7 @@ router.post('/login', async (req, res, next) => {
             return res.json({ token });
         }
         else {
-            res.json("Does not exists")
+            res.json("does not exists")
         }
     } catch (error) {
         next(error)
