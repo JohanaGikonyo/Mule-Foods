@@ -12,9 +12,18 @@ import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 import CloseIcon from '@mui/icons-material/Close';
 import Person2Icon from '@mui/icons-material/Person2';
 import { jwtDecode } from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 const MenuDrawer = () => {
     const [open, setOpen] = useState(false);
     const [email, setEmail] = useState("")
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        // Clear token from local storage
+        localStorage.removeItem('token');
+        // Redirect to login page
+        navigate('/login');
+    };
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
@@ -47,6 +56,7 @@ const MenuDrawer = () => {
                 <span className='flex items-center justify-between gap-4'> <HomeIcon /><NavLink to='/mainpage/home'>Home</NavLink></span>
                 <span className='flex items-center justify-between gap-4'><HelpCenterIcon /><NavLink to='/mainpage/help'>Help?</NavLink></span>
                 <NavLink to='/mainpage/confirm'>Cornfirm</NavLink>
+                <Button onClick={handleLogout}>Log Out</Button>
             </List>
             <Divider />
             <List className='flex flex-col justify-around items-center gap-5'>
