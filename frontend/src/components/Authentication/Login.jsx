@@ -62,7 +62,7 @@ function Login() {
         e.preventDefault();
         setCircularProgress(prev => !prev)
         try {
-            const response = await axios.post('http://localhost:3000/api/login', {
+            const response = await axios.post('https://mule-foods.onrender.com/api/login', {
                 phone
             })
             if (response.data === "exists") {
