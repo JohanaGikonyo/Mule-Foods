@@ -41,7 +41,7 @@ router.post('/signin', async (req, res, next) => {
                 }
             });
             const secretKey = crypto.randomBytes(32).toString('hex');
-            const token = jwt.sign({ userId: newUser.id, userName: newUser.name, userLocation: newUser.location, userPhone: newUser.phone }, secretKey, { expiresIn: '1y' });
+            const token = jwt.sign({ userId: newUser.id, userName: newUser.name, userLocation: newUser.location, userPhone: newUser.phone, userEmail: newUser.email }, secretKey, { expiresIn: '1y' });
             console.log(`secretkey is ${secretKey}`)
             // Return token to the client
             return res.json({ token });

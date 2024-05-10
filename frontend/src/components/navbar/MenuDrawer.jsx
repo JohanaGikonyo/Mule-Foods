@@ -1,4 +1,5 @@
-import * as React from 'react';
+
+import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
@@ -6,17 +7,30 @@ import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import { NavLink } from 'react-router-dom';
 import SegmentIcon from '@mui/icons-material/Segment';
-
 import HomeIcon from '@mui/icons-material/Home';
 import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 import CloseIcon from '@mui/icons-material/Close';
 import Person2Icon from '@mui/icons-material/Person2';
-import { useUser } from '../Store/Store';
+import { jwtDecode } from 'jwt-decode';
 const MenuDrawer = () => {
-    const [open, setOpen] = React.useState(false);
-    const { userData } = useUser((state) => ({
-        userData: state.userData
-    }))
+    const [open, setOpen] = useState(false);
+    const [email, setEmail] = useState("")
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            try {
+                const decodedToken = jwtDecode(token);
+                if (decodedToken) {
+                    setEmail(decodedToken.userEmail)
+
+                }
+            } catch (error) {
+                console.error('Error decoding token:', error);
+                // Handle error, maybe redirect to login page
+
+            }
+        }
+    }, []);
     const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen);
     };
@@ -37,11 +51,7 @@ const MenuDrawer = () => {
             <Divider />
             <List className='flex flex-col justify-around items-center gap-5'>
                 <span className='flexh items-center justify-between gap-4'><span><Person2Icon /></span><Button><NavLink to="/account">Account</NavLink></Button></span>
-                <small>{userData.map((user) => (
-                    <div key={user.id}>
-                        <p>{user.userEmail}</p>
-                    </div>
-                ))}</small>
+                <small>{email}</small>
 
             </List>
 

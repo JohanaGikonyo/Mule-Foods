@@ -6,14 +6,10 @@ import { AlertTitle, CircularProgress } from '@mui/material';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import { useUser } from '../Store/Store';
 import axios from 'redaxios'
+import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 function SignIn() {
-    const { setUser, userData } = useUser((state) => ({
-        userData: state.userData,
-        setUser: state.setUser
-    }))
     const [phone, setPhone] = useState()
     const [location, setLocation] = useState("")
     const [circularProgress, setCircularProgress] = useState(false)
@@ -25,27 +21,24 @@ function SignIn() {
         horizontal: 'center',
     });
     const { vertical, horizontal } = state;
+
+
     useEffect(() => {
-        userData.map((user) => {
-            <div key={user.id}>
-                {setPhone(user.userPhone)}
+        const token = localStorage.getItem('token');
+        if (token) {
+            try {
+                const decodedToken = jwtDecode(token);
+                if (decodedToken) {
+                    setPhone(decodedToken.userPhone)
+                }
+            } catch (error) {
+                console.error('Error decoding token:', error);
+                // Handle error, maybe redirect to login page
 
-            </div>
+            }
+        }
+    }, []);
 
-        })
-    })
-
-    const handleSetUser = () => {
-        setUser({
-            id: Math.ceil(Math.random() * 1000000),
-            userLocation: location,
-            userPhone: phone
-
-
-        })
-
-
-    }
     const handleSubmit = async (e) => {
         e.preventDefault();
         setCircularProgress(prev => !prev)
@@ -54,7 +47,6 @@ function SignIn() {
                 location
             })
             if (response.data === "success") {
-                handleSetUser();
                 setCircularProgress(prev => !prev)
                 console.log("User Updated Successfully")
                 setSuccessAlert(prev => !prev)
