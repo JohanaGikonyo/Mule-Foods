@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import Button from '@mui/material/Button';
 import Person2Icon from '@mui/icons-material/Person2';
 import { useNavigate } from 'react-router-dom';
+import MenuDrawer from "./MenuDrawer";
 
 function Navbar() {
     const navigate = useNavigate();
@@ -27,6 +28,7 @@ function Navbar() {
                 <NavLink to="/mainpage/account"><Person2Icon /></NavLink>
                 <Button onClick={handleLogout}>Log Out</Button>
             </div>
+            <div className="block lg:hidden"><MenuDrawer /></div>
         </div>
     );
 }

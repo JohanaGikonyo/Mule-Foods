@@ -61,7 +61,7 @@ const MenuDrawer = () => {
             </List>
             <Divider />
             <List className='flex flex-col justify-around items-center gap-5'>
-                <span className='flexh items-center justify-between gap-4'><span><Person2Icon /></span><Button><NavLink to="/account">Account</NavLink></Button></span>
+                <span className='flexh items-center justify-between gap-4'><span><Person2Icon /></span><Button><NavLink to="/mainpage/account">Account</NavLink></Button></span>
                 <small>{email}</small>
 
             </List>
