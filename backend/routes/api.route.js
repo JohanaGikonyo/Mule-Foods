@@ -83,9 +83,9 @@ router.patch('/update/:phone', async (req, res, next) => {
 
         // Check if the user exists
         if (updatedUser) {
-            const { id, name, email, location: newLocation, phone } = updatedUser;
+            const { id, name, email, location, phone } = updatedUser;
             const secretKey = crypto.randomBytes(32).toString('hex');
-            const token = jwt.sign({ userId: id, userName: name, userLocation: newLocation, userPhone: phone, userEmail: email }, secretKey, { expiresIn: '1y' });
+            const token = jwt.sign({ userId: id, userName: name, userLocation: location, userPhone: phone, userEmail: email }, secretKey, { expiresIn: '1y' });
             console.log(`secretkey is ${secretKey}`)
             // Return the new token to the client
             return res.json({ token });
