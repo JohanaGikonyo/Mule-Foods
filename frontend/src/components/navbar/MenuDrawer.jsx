@@ -64,7 +64,7 @@ const MenuDrawer = () => {
             <List className='flex flex-col justify-around items-center gap-5'>
                 <span className='flexh items-center justify-between gap-4'><span>      <Avatar
                     sx={{ bgcolor: deepOrange[500] }}
-                    alt={`${email}`}
+                    alt={`${email.toUpperCase()}`}
                     src="/broken-image.jpg"
                 />
                 </span><Button><NavLink to="/mainpage/account">Account</NavLink></Button></span>

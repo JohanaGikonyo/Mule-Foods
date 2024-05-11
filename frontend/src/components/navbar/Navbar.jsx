@@ -45,7 +45,7 @@ function Navbar() {
                 <NavLink to='/mainpage/confirm'>Confirm</NavLink>
                 <NavLink to="/mainpage/account">  <Avatar
                     sx={{ bgcolor: deepOrange[500] }}
-                    alt={`${email}`}
+                    alt={`${email.toUpperCase()}`}
                     src="/broken-image.jpg"
                 /></NavLink>
                 <Button onClick={handleLogout}>Log Out</Button>
