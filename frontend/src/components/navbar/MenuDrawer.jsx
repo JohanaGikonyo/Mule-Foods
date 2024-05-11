@@ -33,8 +33,8 @@ const MenuDrawer = () => {
             try {
                 const decodedToken = jwtDecode(token);
                 if (decodedToken) {
-                    setName(decodedToken.useName)
-                    setEmail(decodedToken.useEmail)
+                    setName(decodedToken.useName);
+                    setEmail(decodedToken.useEmail);
                 }
             } catch (error) {
                 console.error('Error decoding token:', error);
