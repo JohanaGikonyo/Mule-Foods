@@ -9,9 +9,9 @@ function Help() {
         <div>
             <div className="flex flex-col justify-around items-center m-10 gap-10 p-5">
                 <h1>Call Us
-                    <span className='m-3 cursor-pointer' onClick={handlePhoneCall}>
+                    <span className='m-3 cursor-pointer hover:underline' onClick={handlePhoneCall}>
 
-                        <PhoneIcon className='text-green-400' />
+                        <PhoneIcon className='text-blue-400' />
                         (+254) 784267825
                     </span>
 
@@ -19,7 +19,7 @@ function Help() {
                 <h1>Let`s Chat Here 👉
                     <span className='m-3'>
                         <a href="https://wa.me/+254742377527">
-                            <WhatsAppIcon className='text-green-400' />
+                            <WhatsAppIcon className='text-blue-400' />
                         </a>
                     </span>
                 </h1>

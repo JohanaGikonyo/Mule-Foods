@@ -53,22 +53,23 @@ router.post('/signin', async (req, res, next) => {
 router.post('/login', async (req, res, next) => {
     const { phone } = req.body;
     try {
-        const check = await prisma.user.findUnique({ where: { phone: parseInt(phone) } })
-        if (check) {
+        const user = await prisma.user.findUnique({ where: { phone: parseInt(phone) } })
+        if (user) {
+            const { id, name, email, location } = user;
             const secretKey = crypto.randomBytes(32).toString('hex');
-            const token = jwt.sign({ userPhone: phone }, secretKey, { expiresIn: '1y' });
+            const token = jwt.sign({ userId: id, userName: name, userPhone: phone, userEmail: email, userLocation: location }, secretKey, { expiresIn: '1y' });
             console.log(`secretkey is ${secretKey}`)
             // Return token to the client
             return res.json({ token });
         }
         else {
-            res.json("does not exists")
+            res.json("User does not exist")
         }
     } catch (error) {
         next(error)
     }
-
 })
+
 
 router.patch('/update/:phone', async (req, res, next) => {
     const phone = req.params.phone;

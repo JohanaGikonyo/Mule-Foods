@@ -10,8 +10,9 @@ import SegmentIcon from '@mui/icons-material/Segment';
 import HomeIcon from '@mui/icons-material/Home';
 import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 import CloseIcon from '@mui/icons-material/Close';
-import Person2Icon from '@mui/icons-material/Person2';
 import { jwtDecode } from 'jwt-decode';
+import Avatar from '@mui/material/Avatar';
+import { deepOrange } from '@mui/material/colors';
 
 import { useNavigate } from 'react-router-dom';
 const MenuDrawer = () => {
@@ -61,7 +62,12 @@ const MenuDrawer = () => {
             </List>
             <Divider />
             <List className='flex flex-col justify-around items-center gap-5'>
-                <span className='flexh items-center justify-between gap-4'><span><Person2Icon /></span><Button><NavLink to="/mainpage/account">Account</NavLink></Button></span>
+                <span className='flexh items-center justify-between gap-4'><span>      <Avatar
+                    sx={{ bgcolor: deepOrange[500] }}
+                    alt={`${email}`}
+                    src="/broken-image.jpg"
+                />
+                </span><Button><NavLink to="/mainpage/account">Account</NavLink></Button></span>
                 <small>{email}</small>
 
             </List>

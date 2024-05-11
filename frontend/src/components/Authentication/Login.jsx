@@ -7,7 +7,6 @@ import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import axios from 'redaxios'
-import { useUser } from '../Store/Store';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 function Login() {
@@ -16,11 +15,6 @@ function Login() {
     const [circularProgress, setCircularProgress] = useState(false)
     const [successAlert, setSuccessAlert] = useState(false)
     const [failAlert, setFailAlert] = useState(false)
-    const { setUser } = useUser((state) => ({
-        setUser: state.setUser
-    }
-
-    ))
 
     const navigate = useNavigate();
     useEffect(() => {
@@ -47,17 +41,6 @@ function Login() {
     });
     const { vertical, horizontal } = state;
 
-    const handleSetUser = () => {
-        setUser({
-            id: Math.ceil(Math.random() * 1000000),
-
-            userPhone: phone
-
-        })
-
-
-    }
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setCircularProgress(prev => !prev)
@@ -75,7 +58,6 @@ function Login() {
                 setCircularProgress(prev => !prev)
                 localStorage.setItem('token', response.data.token);
                 setSuccessAlert(prev => !prev)
-                handleSetUser();
 
             }
         }

@@ -6,14 +6,11 @@ import { AlertTitle, CircularProgress } from '@mui/material';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import { useUser } from '../Store/Store';
 import axios from 'redaxios'
 import { useNavigate, NavLink } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 function SignIn() {
-    const { setUser } = useUser((state) => ({
-        setUser: state.setUser
-    }))
+
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState()
@@ -47,18 +44,7 @@ function SignIn() {
     }, [navigate]);
 
 
-    const handleSetUser = () => {
-        setUser({
-            id: Math.ceil(Math.random() * 1000000),
-            userName: name,
-            userEmail: email,
-            userPhone: phone,
-            userLocation: location
 
-        })
-
-
-    }
     const handleSubmit = async (e) => {
         e.preventDefault();
         setCircularProgress(prev => !prev)
@@ -75,7 +61,6 @@ function SignIn() {
 
                 setCircularProgress(prev => !prev)
                 console.log("created user Successfully")
-                handleSetUser();
                 localStorage.setItem('token', response.data.token);
                 setSuccessAlert(prev => !prev)
             }

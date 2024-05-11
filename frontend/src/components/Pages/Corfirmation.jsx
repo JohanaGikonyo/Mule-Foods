@@ -2,7 +2,6 @@ import { Avatar, Stack } from "@mui/material"
 import { green } from '@mui/material/colors';
 import DoneIcon from '@mui/icons-material/Done';
 import Button from '@mui/material/Button';
-// import { useUser } from "../Store/Store";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { jwtDecode } from 'jwt-decode';
@@ -38,7 +37,7 @@ function Corfirmation() {
             <div>
                 <h2>Order Succefull</h2>
                 <h4 >Your Food Shall be delivered to
-                    <span className="text-teal-500  p-1  thanks ">{phone}  at {location}</span>
+                    <span className="text-blue-500  p-1  thanks ">{phone}  at {location}</span>
 
                     in one(1) Hour
                 </h4>
