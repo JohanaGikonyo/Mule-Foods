@@ -52,6 +52,7 @@ function Account() {
             }
             else {
                 setCircularProgress(prev => !prev)
+                localStorage.setItem('token', response.data.token);
                 console.log("User Updated Successfully")
                 setSuccessAlert(prev => !prev)
 
