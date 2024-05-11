@@ -17,8 +17,7 @@ import { deepOrange } from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom';
 const MenuDrawer = () => {
     const [open, setOpen] = useState(false);
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("")
+    const [email, setName] = useState("")
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -33,8 +32,8 @@ const MenuDrawer = () => {
             try {
                 const decodedToken = jwtDecode(token);
                 if (decodedToken) {
-                    setName(decodedToken.useName);
-                    setEmail(decodedToken.useEmail);
+                    setName(decodedToken.userEmail)
+
                 }
             } catch (error) {
                 console.error('Error decoding token:', error);
@@ -65,7 +64,7 @@ const MenuDrawer = () => {
             <List className='flex flex-col justify-around items-center gap-5'>
                 <span className='flexh items-center justify-between gap-4'><span>      <Avatar
                     sx={{ bgcolor: deepOrange[500] }}
-                    alt={`${name}`}
+                    alt={`${email}`}
                     src="/broken-image.jpg"
                 />
                 </span><Button><NavLink to="/mainpage/account">Account</NavLink></Button></span>

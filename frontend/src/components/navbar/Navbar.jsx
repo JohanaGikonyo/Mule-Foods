@@ -8,7 +8,7 @@ import { jwtDecode } from 'jwt-decode';
 import MenuDrawer from "./MenuDrawer";
 
 function Navbar() {
-    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
     const navigate = useNavigate();
     const handleLogout = () => {
         // Clear token from local storage
@@ -22,7 +22,7 @@ function Navbar() {
             try {
                 const decodedToken = jwtDecode(token);
                 if (decodedToken) {
-                    setName(decodedToken.userEmail)
+                    setEmail(decodedToken.userEmail)
 
                 }
             } catch (error) {
@@ -45,7 +45,7 @@ function Navbar() {
                 <NavLink to='/mainpage/confirm'>Confirm</NavLink>
                 <NavLink to="/mainpage/account">  <Avatar
                     sx={{ bgcolor: deepOrange[500] }}
-                    alt={`${name}`}
+                    alt={`${email}`}
                     src="/broken-image.jpg"
                 /></NavLink>
                 <Button onClick={handleLogout}>Log Out</Button>
