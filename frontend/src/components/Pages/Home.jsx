@@ -30,8 +30,8 @@ function Home() {
                 {Products.map((item) => (
                     <div key={item.id} className="flex flex-col items-center justify-between bg-slate-50 p-2 rounded-md">
                         <img src={item.image} className=" w-60 h-60 rounded-md" />
-                        <p className="text-slate-800  font-bold">{item.name}</p>
-                        <div className="flex flex-row justify-between items-center gap-10"> <p className=" bg-white   rounded-md"><span className=" p-2">$</span>{item.price}</p>
+                        <p className=" text-orange-400  ">{item.name}</p>
+                        <div className="flex flex-row justify-between items-center gap-10"> <p className=" bg-white font-extrabold text-2xl  rounded-md"><span className=" text-orange-400  p-2">$</span>{item.price}</p>
                             <span className={` ${CheckId(item.id) ? `` : "hidden "}`}>
                                 <Button onClick={() => { removeSelectedId(item.id) }}> <span><CheckIcon /></span>Added</Button>
                             </span>
