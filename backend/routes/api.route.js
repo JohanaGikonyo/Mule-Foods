@@ -90,7 +90,7 @@ router.patch('/update/:phone', async (req, res, next) => {
             // Return the new token to the client
             return res.json({ token });
         } else {
-            res.status(404).json({ message: 'User not found' });
+            res.json('not success')
         }
     } catch (error) {
         next(error);

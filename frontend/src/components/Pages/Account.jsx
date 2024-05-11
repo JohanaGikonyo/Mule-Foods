@@ -46,15 +46,15 @@ function Account() {
             const response = await axios.patch(`https://mule-foods.onrender.com/api/update/${phone}`, {
                 location
             })
-            if (response.data === "success") {
+            if (response.data === "not success") {
+                setCircularProgress(prev => !prev)
+                setFailAlert(prev => !prev)
+            }
+            else {
                 setCircularProgress(prev => !prev)
                 console.log("User Updated Successfully")
                 setSuccessAlert(prev => !prev)
 
-            }
-            else {
-                setCircularProgress(prev => !prev)
-                setFailAlert(prev => !prev)
 
 
             }
@@ -72,7 +72,7 @@ function Account() {
     }
     const handleFailClose = () => {
         setFailAlert(prev => !prev);
-        history('/mainpage/help')
+        history('/mainpage/account')
 
     }
 
@@ -99,7 +99,7 @@ function Account() {
                     sx={{ width: '100%' }}
                 >
                     <AlertTitle>Failed</AlertTitle>
-                    Failed! Try to LogIn.
+                    Failed! Try to again.
                 </Alert>
             </Snackbar>
 
