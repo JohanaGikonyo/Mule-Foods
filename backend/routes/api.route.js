@@ -75,11 +75,26 @@ router.patch('/update/:phone', async (req, res, next) => {
     const phone = req.params.phone;
     const { location } = req.body;
     try {
-        const User = await prisma.user.update({ data: { location: location }, where: { phone: parseInt(phone) } })
-        res.json("success")
-    } catch (error) {
-        next(error)
-    }
+        // Update the user's location
+        await prisma.user.update({ data: { location: location }, where: { phone: parseInt(phone) } });
 
-})
+        // Fetch the updated user
+        const updatedUser = await prisma.user.findUnique({ where: { phone: parseInt(phone) } });
+
+        // Check if the user exists
+        if (updatedUser) {
+            const { id, name, email, location: newLocation, phone } = updatedUser;
+            const secretKey = crypto.randomBytes(32).toString('hex');
+            const token = jwt.sign({ userId: id, userName: name, userLocation: newLocation, userPhone: phone, userEmail: email }, secretKey, { expiresIn: '1y' });
+            console.log(`secretkey is ${secretKey}`)
+            // Return the new token to the client
+            return res.json({ token });
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        next(error);
+    }
+});
+
 module.exports = router;
