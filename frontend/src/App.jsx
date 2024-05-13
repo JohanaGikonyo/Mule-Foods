@@ -7,7 +7,7 @@ import Help from './components/Pages/Help';
 import Confirmation from './components/Pages/Corfirmation'
 import Account from './components/Pages/Account';
 import Navbar from './components/navbar/Navbar';
-
+import ProductDetail from './components/Pages/ProductDetail';
 import './App.css';
 
 function App() {
@@ -35,7 +35,8 @@ function MainPageRoutes() {
         <Route path='/help' element={<Help />} />
         <Route path='/confirm' element={<Confirmation />} />
         <Route path='/account' element={<Account />} />
-      </Routes>
+        <Route path='/product/:id' element={<ProductDetail />} />
+      </Routes >
     </>
   );
 }

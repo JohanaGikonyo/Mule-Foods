@@ -39,7 +39,7 @@ function Navbar() {
                     <span className="text-orange-400">Mule</span> Foods
                 </h1>
             </div>
-            <div className="hidden lg:flex flex-row justify-around items-center gap-3">
+            <div className="hidden lg:flex flex-row justify-around items-center gap-3 links">
                 <NavLink to='/mainpage/home'>Home</NavLink>
                 <NavLink to='/mainpage/help'>Help?</NavLink>
                 <NavLink to='/mainpage/confirm'>Confirm</NavLink>

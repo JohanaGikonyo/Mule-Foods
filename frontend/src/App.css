@@ -14,12 +14,11 @@
   color: orange;
 }
 
-a {
+.links a {
   position: relative;
 }
 
-a::after,
-.active::after {
+.links a::after {
   content: "";
   position: absolute;
   height: 2px;
@@ -30,12 +29,12 @@ a::after,
   transition: 0.3s;
 }
 
-a:hover {
+.links a:hover {
   letter-spacing: 3px;
   font-size: larger;
 }
 
-a:hover::after {
+.links a:hover::after {
   width: 100%;
 
 }
