@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -13,7 +12,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import { jwtDecode } from 'jwt-decode';
 import Avatar from '@mui/material/Avatar';
 import { deepOrange } from '@mui/material/colors';
-
 import { useNavigate } from 'react-router-dom';
 const MenuDrawer = () => {
     const [open, setOpen] = useState(false);

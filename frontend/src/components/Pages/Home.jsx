@@ -34,7 +34,7 @@ function Home() {
                                     <Button onClick={() => { removeSelectedId(item.id) }}> <span><CheckIcon /></span>Added</Button>
                                 </span>
                                 <span className={` ${CheckId(item.id) ? `hidden` : ""}`}>
-                                    <Button onClick={() => { handleSelectedId(item.id) }}>Order</Button>
+                                    <Button onClick={() => { handleSelectedId(item.id); }}>Order</Button>
                                 </span>
                             </div>
                         </Link>

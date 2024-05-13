@@ -1,16 +1,32 @@
 import { useParams, NavLink } from "react-router-dom"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Products } from "../Helper/Products";
 import RemoveIcon from '@mui/icons-material/Remove';
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
+import { cartItems } from "../Store/Store";
 function ProductDetail() {
-    const [count, setCount] = useState(1)
+    const { increment, decrement } = cartItems((state) => ({
+        increment: state.increment,
+        decrement: state.decrement
+    }));
     const { id } = useParams();
+    const [amount, setAmount] = useState(() => {
+        // Retrieve amount value from localStorage if available, otherwise default to 0
+        return parseInt(localStorage.getItem(`product_${id}_amount`) || 0);
+    });
+
+    useEffect(() => {
+        // Save amount value to localStorage whenever it changes
+        localStorage.setItem(`product_${id}_amount`, amount);
+    }, [amount, id]);
+
     const product = Products.find(product => product.id === parseInt(id));
     if (!product) {
         return <div>Product Not Found. Such Another Item.</div>
     }
+
+
     return (
         <div>
             <div className="flex flex-col lg:flex-row relative items-center  bg-slate-50 p-2 rounded-md">
@@ -28,14 +44,14 @@ function ProductDetail() {
                         </h3>
                     </strike>
                     <div className="flex gap-5 items-center">
-                        {count === 1 ? <button className="text-slate-400 rounded-full bg-slate-200 p-1"><RemoveIcon /></button>
+                        {amount === 0 ? <button className="text-slate-400 rounded-full bg-slate-200 p-1"><RemoveIcon /></button>
                             :
-                            <button className="text-blue-400 font-extrabold  rounded-full bg-slate-200 p-1" onClick={() => setCount(count - 1)}><RemoveIcon /></button>
+                            <button className="text-blue-400 font-extrabold  rounded-full bg-slate-200 p-1" onClick={() => { decrement(); setAmount(amount - 1) }}><RemoveIcon /></button>
                         }
-                        {count}
-                        <button className="text-blue-400 font-extrabold rounded-full bg-slate-200 p-1" onClick={() => setCount(count + 1)}> <AddIcon /></button>
+                        {amount}
+                        <button className="text-blue-400 font-extrabold rounded-full bg-slate-200 p-1" onClick={() => { increment(); setAmount(amount + 1) }}> <AddIcon /></button>
                     </div>
-                    <div> <button className="px-2 py-1 bg-stone-300 rounded-md text-white font-semibold">Add {count} for ${product.price * count}</button> </div>
+                    <div> <button className="px-2 py-1 bg-stone-300 rounded-md text-white font-semibold">Add {amount} for ${product.price * amount}</button> </div>
 
                 </div>
             </div>

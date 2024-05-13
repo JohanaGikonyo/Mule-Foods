@@ -7,9 +7,13 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import Badge from '@mui/material/Badge';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
+import { cartItems } from "../Store/Store";
 import MenuDrawer from "./MenuDrawer";
 
 function Navbar() {
+    const { count } = cartItems((state) => ({
+        count: state.count
+    }))
     const [email, setEmail] = useState("")
     const navigate = useNavigate();
     const handleLogout = () => {
@@ -42,9 +46,10 @@ function Navbar() {
                 </h1>
             </div>
             <div>
-                <Badge color="primary" badgeContent={4}>
+                <NavLink to="/mainpage/cart" className="text-orange-400"> {count === 0 ? "" : <Badge color="primary" badgeContent={count}>
                     <ShoppingCartOutlinedIcon />
                 </Badge >
+                }</NavLink>
             </div>
             <div className="hidden lg:flex flex-row justify-around items-center gap-3 links">
                 <NavLink to='/mainpage/home'>Home</NavLink>
