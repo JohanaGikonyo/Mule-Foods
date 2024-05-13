@@ -60,7 +60,7 @@ function ProductDetail() {
                     </div>
                     <div className="flex flex-row justify-between items-center gap-10">
                         <small><span>Price:</span></small>
-                        <p className="bg-white font-extrabold text-2xl rounded-md">
+                        <p className=" font-extrabold text-2xl rounded-md">
                             <span className="text-orange-400 p-2">$</span>{product.price}
                         </p>
                     </div>
