@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import { deepOrange } from '@mui/material/colors';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import Badge from '@mui/material/Badge';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import MenuDrawer from "./MenuDrawer";
@@ -39,6 +41,11 @@ function Navbar() {
                     <span className="text-orange-400">Mule</span> Foods
                 </h1>
             </div>
+            <div>
+                <Badge color="primary" badgeContent={4}>
+                    <ShoppingCartOutlinedIcon />
+                </Badge >
+            </div>
             <div className="hidden lg:flex flex-row justify-around items-center gap-3 links">
                 <NavLink to='/mainpage/home'>Home</NavLink>
                 <NavLink to='/mainpage/help'>Help?</NavLink>
@@ -51,7 +58,7 @@ function Navbar() {
                 <Button onClick={handleLogout}>Log Out</Button>
             </div>
             <div className="block lg:hidden"><MenuDrawer /></div>
-        </div>
+        </div >
     );
 }
 

@@ -1,6 +1,7 @@
 import create from 'zustand'
 
-export const useUser = create((set) => ({
-    userData: [],
-    setUser: (user) => { set(() => ({ userData: [user] })) }
+export const cartItems = create((set) => ({
+    count: 1,
+    setCount: () => set((state) => ({ count: state.count }))
+
 }))
