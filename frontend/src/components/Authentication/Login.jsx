@@ -48,9 +48,8 @@ function Login() {
             const response = await axios.post('https://mule-foods.onrender.com/api/login', {
                 phone
             })
-            if (response.data === "does not exists") {
+            if (response.data === "does not exist") {
                 setCircularProgress(prev => !prev)
-
                 console.log("The user does not Exists. Please SignIn")
                 setFailAlert(prev => !prev)
             }

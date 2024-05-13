@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Products } from "../Helper/Products";
 import RemoveIcon from '@mui/icons-material/Remove';
 import CloseIcon from '@mui/icons-material/Close';
+import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import { cartItems } from "../Store/Store";
 
@@ -78,11 +79,13 @@ function ProductDetail() {
                         {amount}
                         <button className="text-blue-400 font-extrabold rounded-full bg-slate-200 p-1" onClick={() => { increment(); setAmount(amount + 1) }}><AddIcon /></button>
                     </div>
-                    <div>
+                    <div className="flex gap-3">
                         <button className="px-2 py-1 bg-stone-300 rounded-md text-white font-semibold">
                             Add {amount} for ${product.price * amount}
                         </button>
+                        <Button>Order</Button>
                     </div>
+
                 </div>
             </div>
         </div>
