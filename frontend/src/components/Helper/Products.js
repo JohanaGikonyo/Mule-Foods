@@ -12,6 +12,8 @@ export const Products = [
         image: food1,
         name: 'Item1',
         price: 20,
+        discount: "-11 % ",
+        priceBefore: 25
 
     },
     {
@@ -19,6 +21,8 @@ export const Products = [
         image: food2,
         name: 'Item2',
         price: 10,
+        discount: "-11 % ",
+        priceBefore: 15
 
     },
     {
@@ -26,6 +30,8 @@ export const Products = [
         image: food3,
         name: 'Item3',
         price: 5,
+        discount: "-11 % ",
+        priceBefore: 15
 
     },
     {
@@ -33,6 +39,8 @@ export const Products = [
         image: food4,
         name: 'Item4',
         price: 12,
+        discount: "-11 % ",
+        priceBefore: 25
 
     },
     {
@@ -40,6 +48,8 @@ export const Products = [
         image: food5,
         name: 'Item5',
         price: 25,
+        discount: "-11 % ",
+        priceBefore: 35
 
     },
     {
@@ -47,6 +57,8 @@ export const Products = [
         image: food6,
         name: 'Item6',
         price: 22,
+        discount: "-11 % ",
+        priceBefore: 25
 
     }
 ]
