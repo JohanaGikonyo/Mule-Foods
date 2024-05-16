@@ -6,11 +6,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import { cartItems } from "../Store/Store";
-
 function ProductDetail() {
-    const { increment, decrement } = cartItems((state) => ({
+    const { increment, decrement, addItems } = cartItems((state) => ({
         increment: state.increment,
-        decrement: state.decrement
+        decrement: state.decrement,
+        addItems: state.addItems
     }));
     const { id } = useParams();
     const [amount, setAmount] = useState(() => {
@@ -42,6 +42,15 @@ function ProductDetail() {
         return <div>Product Not Found. Please select another item.</div>;
     }
 
+    const handleAddItems = () => {
+        addItems({
+            itemId: Math.ceil(Math.random() * 1000000),
+            itemImage: product.image,
+            itemName: product.name,
+            itemPrice: product.price
+        })
+    }
+
     return (
         <div>
             <div className="flex flex-col lg:flex-row relative items-center bg-slate-50 p-2 rounded-md">
@@ -54,12 +63,12 @@ function ProductDetail() {
                     <img src={product.image} alt="" className="w-60 h-60 rounded-md m-10" />
                     <p className="bg-orange-400 text-white absolute rounded p-1 bottom-[20%] left-[15%]">{product.discount}</p>
                 </div>
-                <div className="flex flex-col gap-10 m-10">
-                    <div className="flex flex-row justify-between items-center gap-10">
+                <div className="flex flex-col justify-around  gap-5 m-10">
+                    <div className="flex flex-row justify-around  items-center gap-2">
                         <span><small>Item:</small></span>
                         <p className="text-orange-400">{product.name}</p>
                     </div>
-                    <div className="flex flex-row justify-between items-center gap-10">
+                    <div className="flex flex-row justify-around  items-center gap-2">
                         <small><span>Price:</span></small>
                         <p className=" font-extrabold text-2xl rounded-md">
                             <span className="text-orange-400 p-2">$</span>{product.price}
@@ -83,7 +92,7 @@ function ProductDetail() {
                         <button className="px-2 py-1 bg-stone-300 rounded-md text-white font-semibold">
                             Add {amount} for ${product.price * amount}
                         </button>
-                        <Button>Order</Button>
+                        <Button onClick={handleAddItems}>Order</Button>
                     </div>
 
                 </div>
