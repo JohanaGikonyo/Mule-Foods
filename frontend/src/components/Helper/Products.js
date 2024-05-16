@@ -57,8 +57,44 @@ export const Products = [
         image: food6,
         name: 'Item6',
         price: 22,
-        discount: "-15 % ",
+        discount: "-12 % ",
         priceBefore: 25
+
+    },
+    {
+        id: 7,
+        image: food6,
+        name: 'Item7',
+        price: 20,
+        discount: "-9 % ",
+        priceBefore: 25
+
+    },
+    {
+        id: 8,
+        image: food6,
+        name: 'Item8',
+        price: 18,
+        discount: "-8 % ",
+        priceBefore: 25
+
+    },
+    {
+        id: 9,
+        image: food6,
+        name: 'Item9',
+        price: 19,
+        discount: "-8 % ",
+        priceBefore: 23
+
+    },
+    {
+        id: 10,
+        image: food6,
+        name: 'Item10',
+        price: 12,
+        discount: "-8 % ",
+        priceBefore: 15
 
     }
 ]

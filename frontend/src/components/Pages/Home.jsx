@@ -30,7 +30,9 @@ function Home() {
                 {Products.map((item) => (
                     <div key={item.id} className="bg-slate-50 p-4 rounded-md shadow-md">
                         <p className="text-lg font-semibold text-gray-800">{item.name}</p>
-                        <p className=" bg-slate-50 font-extrabold   rounded-md"><span className=" text-orange-400  p-2">$</span>{item.price}</p>
+                        <div className="flex justify-around items-center mb-2">
+                            {item.priceBefore && <strike className="text-gray-500">${item.priceBefore}</strike>}
+                            <p className=" bg-slate-50 font-extrabold   rounded-md"><span className=" text-orange-400  p-2">$</span>{item.price}</p></div>
 
                         {CheckId(item.id) ? (
                             <Button
@@ -45,7 +47,8 @@ function Home() {
                         ) : (
                             <Button
                                 onClick={() => { handleSelectedId(item.id) }}
-
+                                variant="outlined"
+                                color="primary"
                             >
                                 Order
                             </Button>
@@ -53,6 +56,7 @@ function Home() {
                     </div>
                 ))}
             </div>
+
 
             <div className="mb-5 p-2">
                 <button>
