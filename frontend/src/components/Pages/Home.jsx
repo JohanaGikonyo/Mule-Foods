@@ -28,9 +28,9 @@ function Home() {
 
             <div className="grid lg:grid-cols-3 grid-cols-2 gap-5 m-2">
                 {Products.map((item) => (
-                    <div key={item.id} className="bg-white p-4 rounded-md shadow-md">
+                    <div key={item.id} className="bg-slate-50 p-4 rounded-md shadow-md">
                         <p className="text-lg font-semibold text-gray-800">{item.name}</p>
-                        <p className=" bg-white font-extrabold text-2xl  rounded-md"><span className=" text-orange-400  p-2">$</span>{item.price}</p>
+                        <p className=" bg-slate-50 font-extrabold   rounded-md"><span className=" text-orange-400  p-2">$</span>{item.price}</p>
 
                         {CheckId(item.id) ? (
                             <Button
