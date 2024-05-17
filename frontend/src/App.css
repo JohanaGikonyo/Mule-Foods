@@ -60,17 +60,12 @@
   width: 120%;
 }
 
-table,
-tr,
-thead,
-th,
-td,
-tbody {
-  border: 1px solid black;
-  align-items: center;
-  text-align: center;
-  border-collapse: collapse;
-  margin: 3px;
-  border-radius: 10px;
-  padding: 10px;
+@media (max-width: 640px) {
+  .min-w-full {
+    overflow-x: auto;
+  }
+
+  .sm\:rounded-lg {
+    border-radius: 0;
+  }
 }
