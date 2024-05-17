@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { jwtDecode } from 'jwt-decode';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 function Corfirmation() {
     const [location, setLocation] = useState("")
@@ -35,14 +36,15 @@ function Corfirmation() {
                 </Avatar>
             </Stack>
             <div>
-                <h2>Order Succefull</h2>
-                <h4 >Your Food Shall be delivered to
+                <h2>Your Order was Succefull</h2>
+                <h4 >It will be delivered to
                     <span className="text-blue-500  p-1  thanks ">{phone}  at {location}</span>
 
                     in one(1) Hour
                 </h4>
                 <h5 >Thank You</h5>
                 <Button><NavLink to='/mainpage/account'>Change Location?</NavLink></Button>
+                <div className="mt-10 mb-10"><button className="px-2 py-1 border border-orange-400 rounded-md"><NavLink to='/mainpage/help'>Contact Us <span className="text-blue-500"><ArrowForwardIcon /></span></NavLink></button></div>
             </div>
         </div >
     )
