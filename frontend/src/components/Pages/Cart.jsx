@@ -45,7 +45,7 @@ function Cart() {
                 <table className="min-w-full  divide-y divide-gray-200">
                     <thead className="bg-gray-50">
                         <tr>
-                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
+                            <th className="lg:px-4 lg:py-4 px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
                             <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
                             <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cost (Kshs.)</th>
                             <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Update</th>
@@ -54,7 +54,7 @@ function Cart() {
                     <tbody className="bg-white divide-y divide-gray-200">
                         {items.map((item) => (
                             <tr key={item.itemName}>
-                                <td className="lg:px-4 lg:py-4 px-6 py-3 whitespace-nowrap">{item.itemName}</td>
+                                <td className="lg:px-4 lg:py-4 px-6 py-3 whitespace-wrap">{item.itemName}</td>
                                 <td className="lg:px-4 lg:py-4 px-6 py-3 whitespace-nowrap">{item.itemQuantity}</td>
                                 <td className="lg:px-4 lg:py-4 px-6 py-3 whitespace-nowrap">Kshs.{item.itemCost}</td>
                                 <td className="lg:px-4 lg:py-4 px-6 py-3 whitespace-nowrap">
