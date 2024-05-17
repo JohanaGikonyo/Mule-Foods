@@ -1,15 +1,12 @@
-import { Avatar, Stack } from "@mui/material"
-import { green } from '@mui/material/colors';
-import DoneIcon from '@mui/icons-material/Done';
-import Button from '@mui/material/Button';
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { jwtDecode } from 'jwt-decode';
+import DoneIcon from '@mui/icons-material/Done';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { jwtDecode } from 'jwt-decode';
 
-function Corfirmation() {
-    const [location, setLocation] = useState("")
-    const [phone, setPhone] = useState()
+function Confirmation() {
+    const [location, setLocation] = useState("");
+    const [phone, setPhone] = useState("");
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -17,37 +14,32 @@ function Corfirmation() {
             try {
                 const decodedToken = jwtDecode(token);
                 if (decodedToken) {
-                    setPhone(decodedToken.userPhone)
-                    setLocation(decodedToken.userLocation)
+                    setPhone(decodedToken.userPhone);
+                    setLocation(decodedToken.userLocation);
                 }
             } catch (error) {
                 console.error('Error decoding token:', error);
                 // Handle error, maybe redirect to login page
-
             }
         }
     }, []);
 
     return (
-        <div className="flex flex-col justify-around items-center m-6 p-3">
-            <Stack>
-                <Avatar sx={{ bgcolor: green[300], width: 100, height: 100 }} >
-                    <span className=""><DoneIcon /></span>
-                </Avatar>
-            </Stack>
-            <div>
-                <h2>Your Order was Succefull</h2>
-                <h4 >It will be delivered to
-                    <span className="text-blue-500  p-1  thanks ">{phone}  at {location}</span>
-
-                    in one(1) Hour
-                </h4>
-                <h5 >Thank You</h5>
-                <Button><NavLink to='/mainpage/account'>Change Location?</NavLink></Button>
-                <div className="mt-10 mb-10"><button className="px-2 py-1 border border-orange-400 rounded-md"><NavLink to='/mainpage/help'>Contact Us <span className="text-blue-500"><ArrowForwardIcon /></span></NavLink></button></div>
+        <div className="flex flex-col items-center justify-center mt-10">
+            <div className="max-w-md mx-auto p-8 bg-white shadow-md rounded-md text-center">
+                <div className="flex justify-center mb-6">
+                    <div className="bg-green-300 rounded-full p-3">
+                        <DoneIcon fontSize="large" />
+                    </div>
+                </div>
+                <h2 className="text-xl font-bold mb-4">Your Order Was Successful</h2>
+                <p className="text-gray-600 mb-4">It will be delivered to <span className="text-blue-500">{phone} at {location}</span> in one (1) hour.</p>
+                <p className="text-gray-600 mb-4">Thank You</p>
+                <button className="bg-blue-500 text-white py-2 px-6 rounded-md mb-4"><NavLink to='/mainpage/account'>Change Location</NavLink></button>
+                <button className="border border-orange-400 text-blue-500 py-2 px-6 rounded-md"><NavLink to='/mainpage/help'>Contact Us <ArrowForwardIcon /></NavLink></button>
             </div>
-        </div >
-    )
+        </div>
+    );
 }
 
-export default Corfirmation
+export default Confirmation;
