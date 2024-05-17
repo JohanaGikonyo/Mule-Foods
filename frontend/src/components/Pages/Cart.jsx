@@ -86,16 +86,16 @@ function Cart() {
             <div className="flex gap-3 mt-10">
                 <div className="mt-10 mb-10">
                     <button className="px-2 py-1 border border-orange-400 rounded-md">
-                        <NavLink to='/mainpage/home'><span className="text-blue-500"><ArrowBackIcon /> </span>Back</NavLink>
+                        <NavLink to='/mainpage/home' className="flex flex-row"><span className="text-blue-500"><ArrowBackIcon /> </span>Back</NavLink>
                     </button>
                 </div>
                 <div className="mt-10 mb-10">
-                    <button className="px-2 py-1 border border-orange-400 rounded-md">
-                        <NavLink to='/mainpage/confirm'>Complete Order <span className="text-blue-500"><ArrowForwardIcon /></span></NavLink>
+                    <button className="px-1 py-1 border border-orange-400 rounded-md">
+                        <NavLink to='/mainpage/confirm' className="flex flex-row">Complete <span className="text-blue-500"><ArrowForwardIcon /></span></NavLink>
                     </button>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
