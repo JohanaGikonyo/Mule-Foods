@@ -63,6 +63,7 @@
 @media (max-width: 640px) {
   .min-w-full {
     overflow-x: auto;
+
   }
 
   .sm\:rounded-lg {

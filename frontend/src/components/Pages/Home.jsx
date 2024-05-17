@@ -40,7 +40,7 @@ function Home() {
                 </div>
             </div>
 
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 text-center">
                 <div>
                     <h1 className="text-2xl italic font-semibold m-5">
                         <span className="text-orange-400">Mule</span> Foods
