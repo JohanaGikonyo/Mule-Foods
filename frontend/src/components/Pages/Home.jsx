@@ -68,7 +68,7 @@ function Homes() {
                 <h1 className="text-2xl italic font-semibold m-5">
                     <span className="text-orange-400">Mule</span> Foods
                 </h1>
-                <p>Click on the food to order</p>
+                <p>Click on the + to order Food Item</p>
             </div>
             <div className="grid grid-cols-2 lg:grid-cols-3 p-2 m-2 gap-3">
                 {Products.map((item) => (
@@ -107,10 +107,10 @@ function Homes() {
                                         <span>Plates</span>
                                     </div>
                                     <div className="flex gap-3">
-                                        <button className="px-2 py-1 bg-slate-300 rounded-md text-slate-800">
+                                        <button className="px-2 py-1 bg-gray-300 rounded text-gray-800">
                                             Add {amounts[item.id - 1]} for Ksh.{item.price * amounts[item.id - 1]}
                                         </button>
-                                        <Button disabled={amounts[item.id - 1] === 0} onClick={() => handleAddItemToCart(item)}>Order</Button>
+                                        <Button disabled={amounts[item.id - 1] === 0} onClick={() => handleAddItemToCart(item)} variant="contained" color="primary">Order</Button>
                                     </div>
                                 </div>
                             </div>
