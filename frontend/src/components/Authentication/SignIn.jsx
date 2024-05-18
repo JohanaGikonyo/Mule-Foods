@@ -19,7 +19,6 @@ function SignIn() {
     const [building, setBuilding] = useState("");
     const [floor, setFloor] = useState("");
     const [other, setOther] = useState("");
-    const [location, setLocation] = useState("");
     const [circularProgress, setCircularProgress] = useState(false);
     const [successAlert, setSuccessAlert] = useState(false);
     const [failAlert, setFailAlert] = useState(false);
@@ -49,12 +48,11 @@ function SignIn() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const locationString = `Around ${locationAround}, ${street} street, ${building} building, ${floor}, ${other}`;
-        setLocation(locationString);
+        const locationString = `${locationAround}, ${street} street, ${building} building, ${floor}, ${other}`;
         setCircularProgress(true);
 
         try {
-            const response = await axios.post('http://localhost:3000/api/signin', {
+            const response = await axios.post('https://mule-foods.onrender.com/api/signin', {
                 name,
                 email,
                 location: locationString,
