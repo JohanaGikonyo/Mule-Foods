@@ -49,14 +49,15 @@ function SignIn() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLocation(`${locationAround}, ${street}, ${building}, ${floor}, ${other}`);
+        const locationString = `Around ${locationAround}, ${street} street, ${building} building, ${floor}, ${other}`;
+        setLocation(locationString);
         setCircularProgress(true);
 
         try {
-            const response = await axios.post('https://mule-foods.onrender.com/api/signin', {
+            const response = await axios.post('http://localhost:3000/api/signin', {
                 name,
                 email,
-                location,
+                location: locationString,
                 phone
             });
 
@@ -71,6 +72,7 @@ function SignIn() {
         } catch (error) {
             console.error("An error occurred", error);
             setCircularProgress(false);
+            setFailAlert(true);
         }
     };
 
