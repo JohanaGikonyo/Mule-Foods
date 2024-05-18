@@ -61,6 +61,7 @@ function Home() {
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     handleSelectedId(item.id);
+                                    setProductDetailVisible();
                                 }}
                                 disabled={CheckId(item.id)}
                             >
