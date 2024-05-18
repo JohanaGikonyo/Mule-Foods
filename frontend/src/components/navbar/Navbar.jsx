@@ -19,8 +19,8 @@ function Navbar() {
     const handleLogout = () => {
         // Clear token from local storage
         localStorage.removeItem('token');
-        // Redirect to login page
-        navigate('/login');
+        // Redirect to SignIn page
+        navigate('/');
     };
     useEffect(() => {
         const token = localStorage.getItem('token');
