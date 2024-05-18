@@ -79,7 +79,7 @@ function Homes() {
                                 <div className="flex flex-col justify-around items-center gap-5 m-10">
                                     <div className="flex flex-row justify-around items-center gap-2">
                                         <span><small></small></span>
-                                        <p className="text-orange-400">{item.name}</p>
+                                        <p className="">{item.name}</p>
                                     </div>
                                     <div className="flex flex-row justify-around items-center gap-2">
                                         <small><span></span></small>
