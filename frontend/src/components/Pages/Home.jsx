@@ -78,11 +78,11 @@ function Homes() {
                             <div className="flex flex-col lg:flex-row justify-around items-center gap-5">
                                 <div className="flex flex-col justify-around items-center gap-5 m-10">
                                     <div className="flex flex-row justify-around items-center gap-2">
-                                        <span><small>Item:</small></span>
+                                        <span><small></small></span>
                                         <p className="text-orange-400">{item.name}</p>
                                     </div>
                                     <div className="flex flex-row justify-around items-center gap-2">
-                                        <small><span>Price:</span></small>
+                                        <small><span></span></small>
                                         <p className="font-extrabold text-2xl rounded-md">
                                             <span className="text-orange-400 p-2">Ksh.</span>{item.price}
                                         </p>
@@ -107,9 +107,7 @@ function Homes() {
                                         <span>Plates</span>
                                     </div>
                                     <div className="flex gap-3">
-                                        <button className="px-2 py-1 bg-gray-300 rounded text-gray-800">
-                                            Add {amounts[item.id - 1]} for Ksh.{item.price * amounts[item.id - 1]}
-                                        </button>
+
                                         <Button disabled={amounts[item.id - 1] === 0} onClick={() => handleAddItemToCart(item)} variant="contained" color="primary">Order</Button>
                                     </div>
                                 </div>
