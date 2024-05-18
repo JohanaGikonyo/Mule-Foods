@@ -53,7 +53,7 @@ function Home() {
                         <div key={item.id} className="bg-slate-50 p-4 rounded-md shadow-md hover:cursor-pointer" onClick={() => { handleProduct(item) }}>
                             <p className="text-lg font-semibold text-gray-800">{item.name}</p>
                             <div className="flex justify-around items-center mb-2">
-                                {item.priceBefore && <strike className="text-gray-500">Ksh.{item.priceBefore}</strike>}
+                                {/* {item.priceBefore && <strike className="text-gray-500">Ksh.{item.priceBefore}</strike>} */}
                                 <p className="bg-slate-50 font-extrabold rounded-md">
                                     <span className="text-orange-400 p-2">Ksh.</span>{item.price}
                                 </p>

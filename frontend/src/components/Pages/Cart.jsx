@@ -40,24 +40,24 @@ function Cart() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center mt-10 ml-5 px-20 overflow-x-auto">
-            <div className="shadow-lg bg-white overflow-hidden sm:rounded-lg">
-                <table className="min-w-full  divide-y divide-gray-200">
+        <div className="flex flex-col items-center justify-center mt-10 px-2 md:px-20">
+            <div className="shadow-lg bg-white overflow-hidden sm:rounded-lg w-full">
+                <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-50">
                         <tr>
-                            <th className="lg:px-4 lg:py-4 px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
-                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
-                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cost (Kshs.)</th>
-                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Update</th>
+                            <th className="px-2 py-2 text-xs font-medium text-gray-500 uppercase tracking-wider md:px-6 md:py-3">Product</th>
+                            <th className="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider md:px-6 md:py-3">Quantity</th>
+                            <th className="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider md:px-6 md:py-3">Cost (Kshs.)</th>
+                            <th className="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider md:px-6 md:py-3">Update</th>
                         </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
                         {items.map((item) => (
                             <tr key={item.itemName}>
-                                <td className="lg:px-4 lg:py-4 px-6 py-3 whitespace-wrap">{item.itemName}</td>
-                                <td className="lg:px-4 lg:py-4 px-6 py-3 whitespace-nowrap">{item.itemQuantity}</td>
-                                <td className="lg:px-4 lg:py-4 px-6 py-3 whitespace-nowrap">Kshs.{item.itemCost}</td>
-                                <td className="lg:px-4 lg:py-4 px-6 py-3 whitespace-nowrap">
+                                <td className="px-2 py-2 md:px-6 md:py-3 whitespace-nowrap">{item.itemName}</td>
+                                <td className="px-2 py-2 md:px-6 md:py-3 whitespace-nowrap">{item.itemQuantity}</td>
+                                <td className="px-2 py-2 md:px-6 md:py-3 whitespace-nowrap">Kshs.{item.itemCost}</td>
+                                <td className="px-2 py-2 md:px-6 md:py-3 whitespace-nowrap">
                                     <button
                                         className="text-blue-400 font-extrabold rounded-full bg-slate-200 p-1"
                                         onClick={() => handleDecrement(item.itemName)}
@@ -75,9 +75,9 @@ function Cart() {
                             </tr>
                         ))}
                         <tr className="bg-gray-100">
-                            <td className="lg:px-4 lg:py-4 px-6 py-3 font-semibold">Total</td>
-                            <td className="lg:px-4 lg:py-4 px-6 py-3 font-semibold">{totalQuantity}</td>
-                            <td className="lg:px-4 lg:py-4 px-6 py-3 font-semibold">Kshs.{totalCost}</td>
+                            <td className="px-2 py-2 md:px-6 md:py-3 font-semibold">Total</td>
+                            <td className="px-2 py-2 md:px-6 md:py-3 font-semibold">{totalQuantity}</td>
+                            <td className="px-2 py-2 md:px-6 md:py-3 font-semibold">Kshs.{totalCost}</td>
                             <td></td>
                         </tr>
                     </tbody>
@@ -95,7 +95,7 @@ function Cart() {
                     </button>
                 </div>
             </div>
-        </div >
+        </div>
     );
 }
 
