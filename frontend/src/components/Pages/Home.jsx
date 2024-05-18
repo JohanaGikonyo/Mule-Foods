@@ -60,8 +60,8 @@ function Homes() {
                     <div key={item.id} className="flex justify-center items-center">
                         <div className="bg-white p-5 rounded-md shadow-lg w-full max-w-md">
                             <div className="flex flex-col items-center gap-5">
-                                <p className="text-lg">{item.name}</p>
-                                <p className="font-extrabold text-2xl">
+                                <p className="text-lg font-extrabold">{item.name}</p>
+                                <p className="font-bold">
                                     <span className="text-orange-400">Ksh.</span>{item.price}
                                 </p>
                                 <div className="flex items-center gap-3">
