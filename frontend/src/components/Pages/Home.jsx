@@ -34,7 +34,7 @@ function Home() {
 
     return (
         <div>
-            <div className="flex justify-around items-center ">
+            <div className="flex  items-center ">
                 <div className="z-30 fixed top-[25%] ">
                     {productDetailVisible ? <ProductDetail /> : ""}
                 </div>
