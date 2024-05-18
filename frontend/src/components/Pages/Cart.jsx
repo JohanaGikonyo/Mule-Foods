@@ -22,6 +22,7 @@ function Cart() {
         const totalQuantity = items.reduce((sum, item) => sum + item.itemQuantity, 0);
         setTotalCost(totalCost);
         setTotalQuantity(totalQuantity);
+
     }, [items]);
 
     const handleIncrement = (itemName) => {
