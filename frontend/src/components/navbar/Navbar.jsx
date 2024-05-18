@@ -46,10 +46,10 @@ function Navbar() {
                 </h1>
             </div>
             <div>
-                <NavLink to="/mainpage/cart" className="text-orange-400"> {count === 0 ? "" : <Badge color="primary" badgeContent={count}>
+                <NavLink to="/mainpage/cart" className="text-orange-400">  <Badge color="primary" badgeContent={count}>
                     <ShoppingCartOutlinedIcon />
                 </Badge >
-                }</NavLink>
+                </NavLink>
             </div>
             <div className="hidden lg:flex flex-row justify-around items-center gap-3 links">
                 <NavLink to='/mainpage/home'>Home</NavLink>

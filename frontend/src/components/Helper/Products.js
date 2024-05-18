@@ -125,5 +125,14 @@ export const Products = [
         discount: "-8 % ",
         priceBefore: 155
 
+    },
+    {
+        id: 14,
+        image: food6,
+        name: 'Githeri',
+        price: 150,
+        discount: "-8 % ",
+        priceBefore: 155
+
     }
 ]
