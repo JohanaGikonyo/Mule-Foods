@@ -108,7 +108,7 @@ function SignIn() {
                         <TextField id="outlined-basic" label="Name" variant="standard" helperText="Please enter your name" required onChange={(e) => setName(e.target.value)} />
                         <TextField id="outlined-basic" type='number' variant="standard" InputProps={{ startAdornment: <InputAdornment position="start">(+254)</InputAdornment> }} label="Phone Number" onChange={(e) => setPhone(e.target.value)} maxLength={9} />
                         <TextField id="outlined-basic" type='email' variant="standard" label="Email Address" required onChange={(e) => setEmail(e.target.value)} />
-                        <TextField id="outlined-basic" type='text' label="Location around" variant="standard" onChange={(e) => setLocationAround(e.target.value)} required />
+                        <TextField id="outlined-basic" type='text' label="Location around upperHill" variant="standard" onChange={(e) => setLocationAround(e.target.value)} required />
                         <TextField id="outlined-basic" type='text' label="Street" variant="standard" onChange={(e) => setStreet(e.target.value)} required />
                         <TextField id="outlined-basic" type='text' label="Building" variant="standard" onChange={(e) => setBuilding(e.target.value)} />
                         <TextField id="outlined-basic" type='text' label="Floor" variant="standard" onChange={(e) => setFloor(e.target.value)} />

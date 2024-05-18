@@ -28,6 +28,7 @@ function ProductDetail() {
                 itemQuantity: amount
             });
             setAmount(0); // Reset amount after adding to cart
+            setProductDetailVisible(false);
         }
     };
 
