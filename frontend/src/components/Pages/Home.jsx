@@ -88,9 +88,9 @@ function Homes() {
                                         </p>
                                     </div>
                                     <div className="flex gap-5 items-center">
-                                        <button className="flex gap-1 items-center border rounded-md border-slate-400 px-2 py-1">
+                                        <button className="flex gap-1 items-center  px-2 py-1">
                                             <button
-                                                className="text-blue-400 font-extrabold rounded-full bg-slate-200 p-1"
+                                                className="text-blue-400 font-extrabold rounded-full  p-1"
                                                 onClick={() => decrementAmount(item.id - 1)}
                                                 disabled={amounts[item.id - 1] === 0}
                                             >
@@ -98,13 +98,13 @@ function Homes() {
                                             </button>
                                             {amounts[item.id - 1]}
                                             <button
-                                                className="text-blue-400 font-extrabold rounded-full bg-slate-200 p-1"
+                                                className="text-blue-400 font-extrabold rounded-full  p-1"
                                                 onClick={() => incrementAmount(item.id - 1)}
                                             >
                                                 <AddIcon />
                                             </button>
                                         </button>
-                                        <span>Plates</span>
+
                                     </div>
                                     <div className="flex gap-3">
 
