@@ -11,7 +11,11 @@ import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 function Account() {
     const [phone, setPhone] = useState()
-    const [location, setLocation] = useState("")
+    const [locationAround, setLocationAround] = useState("");
+    const [street, setStreet] = useState("");
+    const [building, setBuilding] = useState("");
+    const [floor, setFloor] = useState("");
+    const [other, setOther] = useState("");
     const [circularProgress, setCircularProgress] = useState(false)
     const [successAlert, setSuccessAlert] = useState(false)
     const [failAlert, setFailAlert] = useState(false)
@@ -41,10 +45,12 @@ function Account() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const locationString = `${locationAround}, ${street} street, ${building} building, ${floor}, ${other}`;
+
         setCircularProgress(prev => !prev)
         try {
             const response = await axios.patch(`https://mule-foods.onrender.com/api/update/${phone}`, {
-                location
+                location: locationString
             })
             if (response.data === "not success") {
                 setCircularProgress(prev => !prev)
@@ -123,8 +129,11 @@ function Account() {
                             startAdornment: <InputAdornment position="start">(+254)</InputAdornment>,
                         }}
                             label="Phone Number" onChange={(e) => { setPhone(e.target.value) }} maxLength={9} />
-                        <TextField id="outlined-basic" type='text' variant="standard"
-                            label="Location" placeholder={location} onChange={(e) => { setLocation(e.target.value) }} />
+                        <TextField id="outlined-basic" type='text' label="Location around upperHill" variant="standard" onChange={(e) => setLocationAround(e.target.value)} required />
+                        <TextField id="outlined-basic" type='text' label="Street" variant="standard" onChange={(e) => setStreet(e.target.value)} required />
+                        <TextField id="outlined-basic" type='text' label="Building" variant="standard" onChange={(e) => setBuilding(e.target.value)} />
+                        <TextField id="outlined-basic" type='text' label="Floor" variant="standard" onChange={(e) => setFloor(e.target.value)} />
+                        <TextField id="outlined-basic" type='text' label="Other" variant="standard" onChange={(e) => setOther(e.target.value)} />
 
                     </Box>
                     <div>
