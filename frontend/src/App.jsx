@@ -1,5 +1,5 @@
 
-import { Routes, Route, Outlet, Navigate } from 'react-router-dom';
+import { Routes, Route, Outlet } from 'react-router-dom';
 import SignIn from './components/Authentication/SignIn';
 import Login from './components/Authentication/Login';
 import Home from './components/Pages/Home';
@@ -17,7 +17,7 @@ function App() {
   // Check if the user is authenticated
   if (token) {
     // If authenticated, redirect to main page
-    return <MainPageRoutes />
+    return <Routes><Route path='/mainpage/*' element={<MainPageRoutes />} /></Routes>
   }
   return (
     <div className=''>
