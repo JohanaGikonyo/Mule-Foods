@@ -1,6 +1,7 @@
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
-import jwtDecode from 'jwt-decode'; // Corrected import statement
+import * as jwtDecode from 'jwt-decode';
+
 
 export const cartItems = create((set) => ({
     count: 0,
