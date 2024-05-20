@@ -15,17 +15,18 @@ import Avatar from '@mui/material/Avatar';
 import { deepOrange } from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom';
 const MenuDrawer = () => {
+    const clearToken = useAuthStore((state) => state.clearToken);
+    const token = useAuthStore(state => state.token)
     const [open, setOpen] = useState(false);
     const [email, setName] = useState("")
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        // Clear token from local storage
-        localStorage.removeItem('token');
+        clearToken()
         // Redirect to SignIn page
         navigate('/');
     };
-    const token = useAuthStore(state => state.token)
+
     useEffect(() => {
 
         if (token) {
