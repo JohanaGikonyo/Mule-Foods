@@ -13,12 +13,12 @@ import './App.css';
 
 function App() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
+  const history = Navigate();
   return (
     <div className=''>
       <Routes>
         {/* Redirect to main page if already authenticated */}
-        {isAuthenticated() && <Route path='/' element={<Navigate to='/mainpage/home' />} />}
+        {isAuthenticated() && history('/mainpage/home')}
         {/* Render sign-in page if not authenticated */}
         <Route path='/mainpage/*' element={<MainPageRoutes />} />
         <Route path='/' element={<SignIn />} />
