@@ -10,6 +10,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 import CloseIcon from '@mui/icons-material/Close';
 import { jwtDecode } from 'jwt-decode';
+import { useAuthStore } from '../Store/Store';
 import Avatar from '@mui/material/Avatar';
 import { deepOrange } from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom';
@@ -24,8 +25,9 @@ const MenuDrawer = () => {
         // Redirect to SignIn page
         navigate('/');
     };
+    const token = useAuthStore(state => state.token)
     useEffect(() => {
-        const token = localStorage.getItem('token');
+
         if (token) {
             try {
                 const decodedToken = jwtDecode(token);
@@ -39,7 +41,7 @@ const MenuDrawer = () => {
 
             }
         }
-    }, []);
+    }, [token]);
     const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen);
     };

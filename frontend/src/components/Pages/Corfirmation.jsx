@@ -3,13 +3,12 @@ import { NavLink } from "react-router-dom";
 import DoneIcon from '@mui/icons-material/Done';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { jwtDecode } from 'jwt-decode';
-
+import { useAuthStore } from "../Store/Store";
 function Confirmation() {
     const [location, setLocation] = useState("");
     const [name, setName] = useState("");
-
+    const token = useAuthStore(state => state.token)
     useEffect(() => {
-        const token = localStorage.getItem('token');
         if (token) {
             try {
                 const decodedToken = jwtDecode(token);
@@ -22,7 +21,7 @@ function Confirmation() {
                 // Handle error, maybe redirect to login page
             }
         }
-    }, []);
+    }, [token]);
 
     return (
         <div className="flex flex-col items-center justify-center mt-10">

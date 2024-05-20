@@ -8,6 +8,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import axios from 'redaxios'
 import { jwtDecode } from 'jwt-decode';
+import { useAuthStore } from '../Store/Store';
 import { useNavigate } from 'react-router-dom';
 function Account() {
     const [phone, setPhone] = useState()
@@ -20,6 +21,7 @@ function Account() {
     const [successAlert, setSuccessAlert] = useState(false)
     const [failAlert, setFailAlert] = useState(false)
     const history = useNavigate()
+    const token = useAuthStore(state => state.token)
     const [state] = useState({
         vertical: 'top',
         horizontal: 'center',
@@ -28,7 +30,7 @@ function Account() {
 
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+
         if (token) {
             try {
                 const decodedToken = jwtDecode(token);
@@ -41,7 +43,7 @@ function Account() {
 
             }
         }
-    }, []);
+    }, [token]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -58,7 +60,7 @@ function Account() {
             }
             else {
                 setCircularProgress(prev => !prev)
-                localStorage.setItem('token', response.data.token);
+                useAuthStore.setState({ token: response.data.token });
                 console.log("User Updated Successfully")
                 setSuccessAlert(prev => !prev)
 

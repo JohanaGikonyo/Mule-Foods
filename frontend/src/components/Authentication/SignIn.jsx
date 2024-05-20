@@ -9,7 +9,7 @@ import Alert from '@mui/material/Alert';
 import axios from 'redaxios';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-
+import { useAuthStore } from '../Store/Store';
 function SignIn() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -27,12 +27,13 @@ function SignIn() {
         vertical: 'top',
         horizontal: 'center',
     });
+    const token = useAuthStore((state) => { state.token })
     const { vertical, horizontal } = state;
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+
         if (token) {
             try {
                 const decodedToken = jwtDecode(token);
@@ -44,7 +45,7 @@ function SignIn() {
                 navigate('/');
             }
         }
-    }, [navigate]);
+    }, [token, navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -64,7 +65,7 @@ function SignIn() {
                 setFailAlert(true);
             } else {
                 setCircularProgress(false);
-                localStorage.setItem('token', response.data.token);
+                useAuthStore.setState({ token: response.data.token });
                 setSuccessAlert(true);
             }
         } catch (error) {

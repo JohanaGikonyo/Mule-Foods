@@ -1,4 +1,6 @@
 import create from 'zustand'
+import { persist } from 'zustand/middleware';
+import jwtDecode from 'jwt-decode';
 
 export const cartItems = create((set) => ({
     count: 0,
@@ -33,9 +35,35 @@ export const cartItems = create((set) => ({
 }));
 
 
-export const useItemStore = create((set) => ({
-    product: [],
-    setProduct: (item) => set({ product: item }),
-    productDetailVisible: false,
-    setProductDetailVisible: () => set((state) => ({ productDetailVisible: !state.productDetailVisible })),
-}));
+
+
+export const useAuthStore = create(
+    persist(
+        (set, get) => ({
+            token: null,
+            setToken: (token) => {
+                set({ token });
+            },
+            clearToken: () => {
+                set({ token: null });
+            },
+            isAuthenticated: () => {
+                const token = get().token;
+                if (token) {
+                    try {
+                        const decodedToken = jwtDecode(token);
+                        return !!decodedToken;
+                    } catch (error) {
+                        console.error('Invalid token:', error);
+                        return false;
+                    }
+                }
+                return false;
+            },
+        }),
+        {
+            name: 'auth-storage', // unique name
+            getStorage: () => localStorage, // (optional) by default, 'localStorage' is used
+        }
+    )
+);
