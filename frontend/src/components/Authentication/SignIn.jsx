@@ -1,13 +1,14 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AlertTitle, CircularProgress } from '@mui/material';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import axios from 'redaxios';
 import { useNavigate, NavLink } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 import { useAuthStore } from '../Store/Store';
 function SignIn() {
     const [name, setName] = useState("");
@@ -26,8 +27,25 @@ function SignIn() {
         vertical: 'top',
         horizontal: 'center',
     });
-
+    const token = useAuthStore((state) => state.token)
     const { vertical, horizontal } = state;
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+
+        if (token) {
+            try {
+                const decodedToken = jwtDecode(token);
+                if (decodedToken) {
+                    navigate('/mainpage/*');
+                }
+            } catch (error) {
+                console.error('Error decoding token:', error);
+                navigate('/');
+            }
+        }
+    }, [token, navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
