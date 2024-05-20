@@ -1,5 +1,5 @@
 
-import { Routes, Route, Outlet } from 'react-router-dom';
+import { Routes, Route, Outlet, Navigate } from 'react-router-dom';
 import SignIn from './components/Authentication/SignIn';
 import Login from './components/Authentication/Login';
 import Home from './components/Pages/Home';
@@ -8,14 +8,18 @@ import Confirmation from './components/Pages/Corfirmation'
 import Account from './components/Pages/Account';
 import Cart from './components/Pages/Cart';
 import Navbar from './components/navbar/Navbar';
+import { useAuthStore } from './components/Store/Store';
 import './App.css';
 
 function App() {
-
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   return (
     <div className=''>
       <Routes>
+        {/* Redirect to main page if already authenticated */}
+        {isAuthenticated() && <Route path='/' element={<Navigate to='/mainpage/home' />} />}
+        {/* Render sign-in page if not authenticated */}
         <Route path='/mainpage/*' element={<MainPageRoutes />} />
         <Route path='/' element={<SignIn />} />
         <Route path='/login' element={<Login />} />
