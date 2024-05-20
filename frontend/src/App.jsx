@@ -12,13 +12,16 @@ import { useAuthStore } from './components/Store/Store';
 import './App.css';
 
 function App() {
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const token = useAuthStore((state) => state.token);
+
+  // Check if the user is authenticated
+  if (token) {
+    // If authenticated, redirect to main page
+    return <Navigate to="/mainpage/home" />;
+  }
   return (
     <div className=''>
       <Routes>
-        {/* Redirect to main page if already authenticated */}
-        {isAuthenticated() && <Navigate to="/mainpage/home" />}
-        {/* Render sign-in page if not authenticated */}
         <Route path='/mainpage/*' element={<MainPageRoutes />} />
         <Route path='/' element={<SignIn />} />
         <Route path='/login' element={<Login />} />
