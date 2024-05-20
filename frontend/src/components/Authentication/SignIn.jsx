@@ -27,7 +27,7 @@ function SignIn() {
         vertical: 'top',
         horizontal: 'center',
     });
-    const token = useAuthStore((state) => { state.token })
+    const token = useAuthStore((state) => state.token)
     const { vertical, horizontal } = state;
 
     const navigate = useNavigate();
