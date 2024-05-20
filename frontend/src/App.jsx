@@ -17,7 +17,7 @@ function App() {
   // Check if the user is authenticated
   if (token) {
     // If authenticated, redirect to main page
-    return <Navigate to="/mainpage/home" />;
+    return <Routes><Route path='/' element={<Navigate to='/mainpage/home' />} /></Routes>
   }
   return (
     <div className=''>
