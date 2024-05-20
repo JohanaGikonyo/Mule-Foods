@@ -18,11 +18,21 @@ function App() {
     <div className=''>
       <Routes>
         {/* Redirect to main page if already authenticated */}
-        {isAuthenticated() && <Route path='/' element={<Navigate to='/mainpage/home' />} />}
+        {isAuthenticated() && (
+          <>
+            <Route path='/' element={<Navigate to='/mainpage/home' />} />
+            <Route path='/login' element={<Navigate to='/mainpage/home' />} />
+          </>
+        )}
+
         {/* Render sign-in page if not authenticated */}
         <Route path='/mainpage/*' element={<MainPageRoutes />} />
-        <Route path='/' element={<SignIn />} />
-        <Route path='/login' element={<Login />} />
+        {!isAuthenticated() && (
+          <>
+            <Route path='/' element={<SignIn />} />
+            <Route path='/login' element={<Login />} />
+          </>
+        )}
       </Routes>
     </div>
   );
