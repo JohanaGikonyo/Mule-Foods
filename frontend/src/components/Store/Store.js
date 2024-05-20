@@ -1,6 +1,6 @@
-import create from 'zustand'
+import create from 'zustand';
 import { persist } from 'zustand/middleware';
-import { jwtDecode } from 'jwt-decode';
+import jwtDecode from 'jwt-decode'; // Corrected import statement
 
 export const cartItems = create((set) => ({
     count: 0,
@@ -33,9 +33,6 @@ export const cartItems = create((set) => ({
     increment: () => set((state) => ({ count: state.count + 1 })),
     decrement: () => set((state) => ({ count: state.count > 0 ? state.count - 1 : 0 }))
 }));
-
-
-
 
 export const useAuthStore = create(
     persist(
