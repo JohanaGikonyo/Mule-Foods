@@ -33,7 +33,6 @@ function Cart() {
     const [location, setLocation] = useState("");
     const [name, setName] = useState("");
     const [circularProgress, setCircularProgress] = useState(false);
-    const [successAlert, setSuccessAlert] = useState(false);
     const [failAlert, setFailAlert] = useState(false);
     const token = useAuthStore(state => state.token)
     const navigate = useNavigate();
@@ -95,7 +94,9 @@ function Cart() {
 
                 setCircularProgress(false);
                 if (response.data === 'Order successful') {
-                    setSuccessAlert(true);
+                    decrement(totalQuantity);
+                    navigate('/mainpage/confirm');
+                    clearItems(); // Clear cart items
                 } else {
                     setFailAlert(true);
                 }
@@ -109,13 +110,7 @@ function Cart() {
         }
     };
 
-    const handleSuccessClose = () => {
-        setSuccessAlert(false);
-        decrement(totalQuantity);
-        navigate('/mainpage/confirm');
-        clearItems(); // Clear cart items
 
-    };
 
     const handleFailClose = () => {
         setFailAlert(false);
@@ -124,13 +119,6 @@ function Cart() {
 
     return (
         <div className="flex flex-col items-center justify-center mt-10 px-2 md:px-20">
-            <Snackbar open={successAlert} autoHideDuration={3000} onClose={handleSuccessClose} anchorOrigin={{ vertical, horizontal }}>
-                <Alert onClose={handleSuccessClose} severity="success" variant="filled" sx={{ width: '100%' }}>
-                    <AlertTitle>Success</AlertTitle>
-                    Successfully Ordered!
-                </Alert>
-            </Snackbar>
-
             <Snackbar open={failAlert} autoHideDuration={3000} onClose={handleFailClose} anchorOrigin={{ vertical, horizontal }}>
                 <Alert onClose={handleFailClose} severity="error" variant="filled" sx={{ width: '100%' }}>
                     <AlertTitle>Failed</AlertTitle>
