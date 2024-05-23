@@ -15,11 +15,12 @@ function Homes() {
             updatedAmounts[index] = Math.max(updatedAmounts[index] + delta, 0);
             return updatedAmounts;
         });
-        delta > 0 ? increment() : decrement();
+
     };
 
-    const handleAddItemToCart = (item) => {
+    const handleAddItemToCart = (item, delta) => {
         const amount = amounts[item.id - 1];
+        delta > 0 ? decrement(amount) : increment(amount);
         if (amount > 0) {
             addItems({
                 itemName: item.name,

@@ -31,8 +31,8 @@ export const cartItems = create((set) => ({
         items: state.items.filter(item => item.itemName !== itemName)
     })),
 
-    increment: () => set((state) => ({ count: state.count + 1 })),
-    decrement: () => set((state) => ({ count: state.count > 0 ? state.count - 1 : 0 }))
+    increment: (value) => set((state) => ({ count: state.count + value })),
+    decrement: (value) => set((state) => ({ count: state.count > 0 ? state.count - value : 0 }))
 }));
 
 export const useAuthStore = create(

@@ -20,4 +20,5 @@ model User {
   location  String
   phone     Int      @unique
   email     String
+  order     String
 }

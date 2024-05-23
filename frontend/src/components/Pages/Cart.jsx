@@ -23,15 +23,16 @@ function Cart() {
         setTotalCost(totalCost);
         setTotalQuantity(totalQuantity);
 
+
     }, [items]);
 
     const handleIncrement = (itemName) => {
         updateItemQuantity(itemName, 1);
-        increment();
+        increment(1);
     };
 
     const handleDecrement = (itemName) => {
-        decrement();
+        decrement(1);
         const item = items.find(item => item.itemName === itemName);
         if (item.itemQuantity === 1) {
             removeItem(itemName);
