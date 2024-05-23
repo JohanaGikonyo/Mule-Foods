@@ -89,7 +89,7 @@ function Cart() {
         try {
             if (totalQuantity !== 0) {
                 setCircularProgress(true);
-                const response = await axios.post('http://localhost:3000/orderapi/order', {
+                const response = await axios.post('https://mule-foods.onrender.com/orderapi/order', {
                     location, name, totalCost, totalQuantity, products: productsToSend
                 });
 
