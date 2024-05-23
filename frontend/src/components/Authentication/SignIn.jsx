@@ -85,7 +85,13 @@ function SignIn() {
 
             <form className='flex flex-col justify-around items-center gap-4 p-2 rounded-md text-slate-700' onSubmit={handleSubmit}>
                 <div className='flex flex-col justify-around items-center gap-4 bg-slate-50 p-2 m-10 rounded-md text-slate-700'>
-                    <h1 className='text-2xl font-semibold italic'><span className='text-orange-400'>Mule</span>Foods</h1>
+                    <div className="text-center flex items-start flex-col justify-between gap-0">
+                        <h1 className="text-2xl font-semibold italic">
+                            <span className="text-orange-400">Mule</span>Foods
+                        </h1>
+                        <p className="text-sm italic font-bold">faster than a phone call</p>
+                    </div>
+
                     <h1 className='border-b-2 border-b-orange-400'>Sign Up</h1>
                     <Box component="form" sx={{ '& > :not(style)': { m: 1, width: '25ch' } }} noValidate autoComplete="off" className='flex flex-col justify-around items-center'>
                         <TextField id="outlined-basic" label="Name" variant="standard" helperText="Please enter your name" required onChange={(e) => setName(e.target.value)} />

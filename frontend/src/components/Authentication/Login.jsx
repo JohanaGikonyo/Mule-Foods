@@ -44,7 +44,12 @@ function Login() {
             </Snackbar>
             <form onSubmit={handleSubmit} className='flex flex-col justify-around items-center gap-4 p-2 rounded-md text-slate-700'>
                 <div className='flex flex-col justify-around items-center gap-4 bg-slate-50 p-2 m-10 rounded-md text-slate-700'>
-                    <h1 className='text-2xl font-semibold italic'><span className='text-orange-400'>Mule </span>Foods</h1>
+                    <div className="text-center flex items-start flex-col justify-between gap-0">
+                        <h1 className="text-2xl font-semibold italic">
+                            <span className="text-orange-400">Mule</span>Foods
+                        </h1>
+                        <p className="text-sm italic font-bold">faster than a phone call</p>
+                    </div>
                     <h1 className='border-b-2 border-b-orange-400'>Log In</h1>
                     <Box
                         component="form"
