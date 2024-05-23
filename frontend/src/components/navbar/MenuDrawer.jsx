@@ -21,6 +21,9 @@ const MenuDrawer = () => {
     const [email, setName] = useState("")
     const navigate = useNavigate();
 
+    const handleLogoClick = () => {
+        navigate('/mainpage/home')
+    }
     const handleLogout = () => {
         clearToken()
         // Redirect to SignIn page
@@ -50,7 +53,7 @@ const MenuDrawer = () => {
     const DrawerList = (
         <Box sx={{ width: 320 }} role="presentation" onClick={toggleDrawer(false)} className='flex flex-col gap-5 '>
             <div className='flex justify-between items-center p-3'>
-                <div className=" text-2xl italic font-semibold"><h1><span className="text-orange-400">Mule</span> Foods</h1></div>
+                <div className=" text-2xl italic font-semibold"><h1 onClick={handleLogoClick}><span className="text-orange-400">Mule</span> Foods</h1></div>
 
                 <button><CloseIcon /></button>
             </div>
@@ -58,7 +61,7 @@ const MenuDrawer = () => {
             <List className='flex flex-col justify-around items-center gap-5 links'>
                 <span className='flex items-center justify-between gap-4'> <HomeIcon /><NavLink to='/mainpage/home'>Home</NavLink></span>
                 <span className='flex items-center justify-between gap-4'><HelpCenterIcon /><NavLink to='/mainpage/help'>Help?</NavLink></span>
-                <NavLink to='/mainpage/confirm'>Cornfirm</NavLink>
+                <NavLink to='/mainpage/confirm'>Confirm</NavLink>
                 <Button onClick={handleLogout}>Log Out</Button>
             </List>
             <Divider />
