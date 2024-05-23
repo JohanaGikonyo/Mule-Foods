@@ -32,7 +32,8 @@ export const cartItems = create((set) => ({
     })),
 
     increment: (value) => set((state) => ({ count: state.count + value })),
-    decrement: (value) => set((state) => ({ count: state.count > 0 ? state.count - value : 0 }))
+    decrement: (value) => set((state) => ({ count: state.count > 0 ? state.count - value : 0 })),
+    clearItems: () => set({ items: [] }),
 }));
 
 export const useAuthStore = create(

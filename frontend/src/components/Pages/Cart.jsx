@@ -1,48 +1,142 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import { cartItems } from "../Store/Store";
 import { NavLink } from "react-router-dom";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+import { AlertTitle, CircularProgress } from '@mui/material';
+import Button from '@mui/material/Button';
+import { jwtDecode } from 'jwt-decode'; // Corrected import
+import { useAuthStore } from "../Store/Store";
+import axios from 'redaxios';
 
 function Cart() {
-    const { items, updateItemQuantity, removeItem, increment, decrement } = cartItems((state) => ({
+    const { items, updateItemQuantity, removeItem, increment, decrement, clearItems } = cartItems((state) => ({
         items: state.items,
         increment: state.increment,
         decrement: state.decrement,
         updateItemQuantity: state.updateItemQuantity,
-        removeItem: state.removeItem
+        removeItem: state.removeItem,
+        clearItems: state.clearItems
     }));
+    const [state] = useState({
+        vertical: 'top',
+        horizontal: 'center',
+    });
+    const { vertical, horizontal } = state;
     const [totalCost, setTotalCost] = useState(0);
     const [totalQuantity, setTotalQuantity] = useState(0);
+    const [location, setLocation] = useState("");
+    const [name, setName] = useState("");
+    const [circularProgress, setCircularProgress] = useState(false);
+    const [successAlert, setSuccessAlert] = useState(false);
+    const [failAlert, setFailAlert] = useState(false);
+    const token = useAuthStore(state => state.token)
+    const navigate = useNavigate();
 
     useEffect(() => {
         const totalCost = items.reduce((sum, item) => sum + item.itemCost, 0);
         const totalQuantity = items.reduce((sum, item) => sum + item.itemQuantity, 0);
         setTotalCost(totalCost);
         setTotalQuantity(totalQuantity);
-
-
-    }, [items]);
+        if (token) {
+            try {
+                const decodedToken = jwtDecode(token);
+                if (decodedToken) {
+                    setName(decodedToken.userName);
+                    setLocation(decodedToken.userLocation);
+                }
+            } catch (error) {
+                console.error('Error decoding token:', error);
+                // Handle error, maybe redirect to login page
+            }
+        }
+    }, [items, token]);
 
     const handleIncrement = (itemName) => {
+        const itemIndex = items.findIndex(item => item.itemName === itemName);
+        const updatedItems = [...items];
+        updatedItems[itemIndex].itemQuantity += 1;
+
         updateItemQuantity(itemName, 1);
         increment(1);
     };
 
     const handleDecrement = (itemName) => {
-        decrement(1);
-        const item = items.find(item => item.itemName === itemName);
-        if (item.itemQuantity === 1) {
+        const itemIndex = items.findIndex(item => item.itemName === itemName);
+        const updatedItems = [...items];
+        updatedItems[itemIndex].itemQuantity -= 1;
+
+        if (updatedItems[itemIndex].itemQuantity <= 0) {
             removeItem(itemName);
-        } else if (item.itemQuantity > 1) {
-            updateItemQuantity(itemName, -1);
+            updatedItems.splice(itemIndex, 1);
         }
+
+        decrement(1);
+        updateItemQuantity(itemName, -1);
+    };
+
+    const handleCompleteOrder = async (e) => {
+        e.preventDefault();
+        const productsToSend = items.map(item => ({
+            productName: item.itemName,
+            quantity: item.itemQuantity
+        }));
+        try {
+            if (totalQuantity !== 0) {
+                setCircularProgress(true);
+                const response = await axios.post('http://localhost:3000/orderapi/order', {
+                    location, name, totalCost, totalQuantity, products: productsToSend
+                });
+
+                setCircularProgress(false);
+                if (response.data === 'Order successful') {
+                    setSuccessAlert(true);
+                } else {
+                    setFailAlert(true);
+                }
+            } else {
+                setFailAlert(true);
+            }
+        } catch (error) {
+            console.error("An error occurred", error);
+            setCircularProgress(false);
+            setFailAlert(true);
+        }
+    };
+
+    const handleSuccessClose = () => {
+        setSuccessAlert(false);
+        decrement(totalQuantity);
+        navigate('/mainpage/confirm');
+        clearItems(); // Clear cart items
+
+    };
+
+    const handleFailClose = () => {
+        setFailAlert(false);
+        navigate('/mainpage/cart');
     };
 
     return (
         <div className="flex flex-col items-center justify-center mt-10 px-2 md:px-20">
+            <Snackbar open={successAlert} autoHideDuration={3000} onClose={handleSuccessClose} anchorOrigin={{ vertical, horizontal }}>
+                <Alert onClose={handleSuccessClose} severity="success" variant="filled" sx={{ width: '100%' }}>
+                    <AlertTitle>Success</AlertTitle>
+                    Successfully Ordered!
+                </Alert>
+            </Snackbar>
+
+            <Snackbar open={failAlert} autoHideDuration={3000} onClose={handleFailClose} anchorOrigin={{ vertical, horizontal }}>
+                <Alert onClose={handleFailClose} severity="error" variant="filled" sx={{ width: '100%' }}>
+                    <AlertTitle>Failed</AlertTitle>
+                    Failed!
+                </Alert>
+            </Snackbar>
             <div className="shadow-lg bg-white overflow-hidden sm:rounded-lg w-full">
                 <table className="min-w-full divide-y divide-gray-200 border border-gray-300">
                     <thead className="bg-gray-50">
@@ -91,11 +185,20 @@ function Cart() {
                         <NavLink to='/mainpage/home' className="flex flex-row"><span className="text-blue-500"><ArrowBackIcon /> </span>Back</NavLink>
                     </button>
                 </div>
-                <div className="mt-10 mb-10">
-                    <button className="px-1 py-1 border border-orange-400 rounded-md">
-                        <NavLink to='/mainpage/confirm' className="flex flex-row">Complete <span className="text-blue-500"><ArrowForwardIcon /></span></NavLink>
-                    </button>
+
+                <div>
+                    {circularProgress ? (
+                        <div className='w-[100%] rounded-md bg-slate-100 z-30'>
+                            <Button className='font-bold p-1 rounded-md flex items-center gap-1'><span className='p-3'><CircularProgress /></span>Please Wait...</Button>
+                        </div>
+                    ) : (
+                        <div className="mt-10 mb-10">
+                            <button className="px-1 py-1 border border-orange-400 rounded-md">
+                                <button className="flex flex-row" onClick={handleCompleteOrder}>Complete <span className="text-blue-500"><ArrowForwardIcon /></span></button>
+                            </button>
+                        </div>)}
                 </div>
+
             </div>
         </div>
     );

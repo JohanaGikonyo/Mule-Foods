@@ -21,3 +21,13 @@ model User {
   phone     Int      @unique
   email     String
 }
+
+model Order {
+  id            Int      @id @default(autoincrement())
+  products      String
+  name          String
+  location      String
+  totalQuantity Int
+  createdAt     DateTime @default(now())
+  totalCost     Int
+}

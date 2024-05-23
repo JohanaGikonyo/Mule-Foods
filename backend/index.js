@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors')
 const app = express()
 const corsOptions = {
-    origin: ['https://mule-foods.vercel.app', 'http://localhost:5174'],
+    origin: ['https://mule-foods.vercel.app', 'http://localhost:5173'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     optionSuccessStatus: 200
@@ -17,6 +17,7 @@ app.use(morgan('dev'));
 app.use(cors(corsOptions));
 
 app.use('/api', require('./routes/api.route'))
+app.use('/orderapi', require('./routes/order'))
 
 app.get('/', async (req, res, next) => {
     res.json({

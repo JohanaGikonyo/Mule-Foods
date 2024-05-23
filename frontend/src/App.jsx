@@ -7,6 +7,7 @@ import Help from './components/Pages/Help';
 import Confirmation from './components/Pages/Corfirmation'
 import Account from './components/Pages/Account';
 import Cart from './components/Pages/Cart';
+import Orders from './components/Admin/Orders';
 import Navbar from './components/navbar/Navbar';
 import { useAuthStore } from './components/Store/Store';
 import './App.css';
@@ -40,7 +41,7 @@ function MainPageRoutes() {
         <Route path='/cart' element={<Cart />} />
         <Route path='/confirm' element={<Confirmation />} />
         <Route path='/account' element={<Account />} />
-
+        <Route path='/orders' element={<Orders />} />
       </Routes >
     </>
   );
