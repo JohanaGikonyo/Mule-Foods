@@ -57,27 +57,22 @@ function Cart() {
     }, [items, token]);
 
     const handleIncrement = (itemName) => {
-        const itemIndex = items.findIndex(item => item.itemName === itemName);
-        const updatedItems = [...items];
-        updatedItems[itemIndex].itemQuantity += 1;
-
         updateItemQuantity(itemName, 1);
-        increment(1);
+        increment(1)
     };
 
     const handleDecrement = (itemName) => {
         const itemIndex = items.findIndex(item => item.itemName === itemName);
         const updatedItems = [...items];
-        updatedItems[itemIndex].itemQuantity -= 1;
-
+        decrement(1)
         if (updatedItems[itemIndex].itemQuantity <= 0) {
             removeItem(itemName);
-            updatedItems.splice(itemIndex, 1);
+        } else {
+            updateItemQuantity(itemName, -1);
         }
-
-        decrement(1);
-        updateItemQuantity(itemName, -1);
     };
+
+
 
     const handleCompleteOrder = async (e) => {
         e.preventDefault();
@@ -143,18 +138,20 @@ function Cart() {
                                 <td className="px-1 py-2 md:px-6 md:py-3 whitespace-nowrap border border-gray-300">Kshs.{item.itemCost}</td>
                                 <td className="px-1 py-2 md:px-6 md:py-3 whitespace-nowrap border border-gray-300 flex justify-around">
                                     <button
-                                        className="text-blue-400 font-extrabold rounded-full  p-1"
-                                        onClick={() => handleDecrement(item.itemName)}
+                                        className="text-blue-400 font-extrabold rounded-full p-1"
+                                        onClick={() => { handleDecrement(item.itemName) }}
                                         disabled={item.itemQuantity < 1}
                                     >
                                         <RemoveIcon fontSize="small" />
                                     </button>
+
                                     <button
-                                        className="text-blue-400 font-extrabold rounded-full  p-1 ml-1"
-                                        onClick={() => handleIncrement(item.itemName)}
+                                        className="text-blue-400 font-extrabold rounded-full p-1 ml-1"
+                                        onClick={() => { handleIncrement(item.itemName) }}
                                     >
                                         <AddIcon fontSize="small" />
                                     </button>
+
                                 </td>
                             </tr>
                         ))}
@@ -188,7 +185,7 @@ function Cart() {
                 </div>
 
             </div>
-        </div>
+        </div >
     );
 }
 
