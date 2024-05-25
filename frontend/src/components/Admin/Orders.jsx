@@ -19,7 +19,7 @@ function Orders() {
     const handleOrderStatus = async (orderId, isChecked) => {
         try {
             const status = isChecked ? 'completed' : 'pending';
-
+            console.log("order id is ", orderId)
             const response = await axios.put(`https://mule-foods.onrender.com/orderapi/updateorderstatus/${orderId}`, { status });
             if (response.status === 200) {
                 setOrders(prevOrders => {
@@ -115,7 +115,7 @@ function Orders() {
                                         <input
                                             type='checkbox'
                                             checked={completedOrderIds.has(order.id)}
-                                            onChange={() => { handleCheckboxChange(order.id); handleOrderStatus() }}
+                                            onChange={() => { handleCheckboxChange(order.id); handleOrderStatus(order.id, !completedOrderIds.has(order.id)); }}
                                         />
                                     </td>
                                 </tr>

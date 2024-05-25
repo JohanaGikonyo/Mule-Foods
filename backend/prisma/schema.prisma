@@ -30,7 +30,7 @@ model Order {
   totalQuantity Int
   createdAt     DateTime @default(now())
   totalCost     Int
-  status        String
+  status        String   @default("pending")
 }
 
 model Admin {
