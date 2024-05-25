@@ -30,4 +30,11 @@ model Order {
   totalQuantity Int
   createdAt     DateTime @default(now())
   totalCost     Int
+  status        String
+}
+
+model Admin {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String @unique
 }

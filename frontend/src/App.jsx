@@ -11,6 +11,7 @@ import Orders from './components/Admin/Orders';
 import Navbar from './components/navbar/Navbar';
 import { useAuthStore } from './components/Store/Store';
 import './App.css';
+import AdminLogin from './components/Admin/AdminLogin';
 
 function App() {
   const token = useAuthStore((state) => state.token);
@@ -42,6 +43,7 @@ function MainPageRoutes() {
         <Route path='/confirm' element={<Confirmation />} />
         <Route path='/account' element={<Account />} />
         <Route path='/orders' element={<Orders />} />
+        <Route path='/admin' element={<AdminLogin />} />
       </Routes >
     </>
   );

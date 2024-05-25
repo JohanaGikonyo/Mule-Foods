@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 function Orders() {
     const [orders, setOrders] = useState([]);
+    const [completedOrderIds, setCompletedOrderIds] = useState(new Set());
 
     useEffect(() => {
         const getOrders = async () => {
@@ -15,16 +16,67 @@ function Orders() {
         };
         getOrders();
     }, []);
+    const handleOrderStatus = async (orderId, isChecked) => {
+        try {
+            // Update the status based on isChecked value
+            const status = isChecked ? 'completed' : 'pending';
+
+            // Send a request to update the order status
+            const response = await axios.put(`http://localhost:3000/orderapi/updateorderstatus/${orderId}`, { status });
+            if (response.status === 200) {
+                // If the status update is successful, update the local state
+                setOrders(prevOrders => {
+                    return prevOrders.map(order => {
+                        if (order.id === orderId) {
+                            return { ...order, status };
+                        } else {
+                            return order;
+                        }
+                    });
+                });
+            }
+        } catch (error) {
+            console.error('Error updating order status:', error);
+        }
+    };
+
     const totalQuantity = orders.reduce((sum, order) => sum + order.totalQuantity, 0);
     const totalCost = orders.reduce((sum, order) => sum + order.totalCost, 0);
+
+    const handleCheckboxChange = (orderId) => {
+        setCompletedOrderIds(prevCompletedOrderIds => {
+            const newCompletedOrderIds = new Set(prevCompletedOrderIds);
+            if (newCompletedOrderIds.has(orderId)) {
+                newCompletedOrderIds.delete(orderId);
+            } else {
+                newCompletedOrderIds.add(orderId);
+            }
+            return newCompletedOrderIds;
+        });
+    };
+    const totalOrders = orders.length;
+
+    const completedOrders = Array.from(completedOrderIds).length;
+    const pendingOrders = orders.length - completedOrders;
+
     // Helper function to get month name
     function getMonthName(monthIndex) {
         const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         return monthNames[monthIndex];
     }
+
     return (
         <div className="p-4">
-
+            <div>
+                <span className='flex flex-row gap-3 justify-around items-center'>
+                    <button>{totalOrders} Orders</button>
+                    <button>{completedOrders} Completed</button>
+                </span>
+                <span className='flex flex-row gap-3 justify-around items-center'>
+                    <button>{pendingOrders} Pending</button>
+                    <button>{orders.length - completedOrders - pendingOrders} Cancelled</button>
+                </span>
+            </div>
             <div className="shadow-lg bg-white overflow-x-auto sm:rounded-lg w-full">
                 <table className="min-w-full divide-y divide-gray-200 border border-gray-300 table-auto">
                     <thead className="bg-gray-50">
@@ -35,7 +87,6 @@ function Orders() {
                             <th className="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border border-gray-300">Location</th>
                             <th className="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border border-gray-300">Time</th>
                             <th className="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border border-gray-300">Check</th>
-
                         </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
@@ -50,6 +101,7 @@ function Orders() {
                             const minutes = orderDate.getMinutes().toString().padStart(2, '0');
                             const amOrPm = orderDate.getHours() < 12 ? 'AM' : 'PM';
                             const formattedTime = `${hours}:${minutes} ${amOrPm}`;
+
                             return (
                                 <tr key={order.id}>
                                     <td className="px-2 py-2 align-text-top whitespace-normal border border-gray-300">{order.id}</td>
@@ -61,16 +113,22 @@ function Orders() {
                                     </td>
                                     <td className="px-2 py-2 whitespace-normal border border-gray-300">{order.location}</td>
                                     <td className="px-2 py-2 whitespace-normal border border-gray-300">{formattedDate} {formattedTime}</td>
-                                    <td className="px-2 py-2 whitespace-normal border border-gray-300"><input type='checkbox' /></td>
+                                    <td className="px-2 py-2 whitespace-normal border border-gray-300">
+                                        <input
+                                            type='checkbox'
+                                            checked={completedOrderIds.has(order.id)}
+                                            onChange={() => { handleCheckboxChange(order.id); handleOrderStatus() }}
+                                        />
+                                    </td>
                                 </tr>
-                            )
+                            );
                         })}
                     </tbody>
                 </table>
                 <h1 className="px-2 py-2 font-semibold border border-gray-300">Total Plates Ordered: {totalQuantity} Plates</h1>
                 <h1 className="px-2 py-2 font-semibold border border-gray-300">Total Cost: Kshs.{totalCost}</h1>
             </div>
-        </div >
+        </div>
     );
 }
 

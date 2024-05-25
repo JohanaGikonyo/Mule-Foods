@@ -18,6 +18,7 @@ app.use(cors(corsOptions));
 
 app.use('/api', require('./routes/api.route'))
 app.use('/orderapi', require('./routes/order'))
+app.use('/admin', require('./routes/admin'))
 
 app.get('/', async (req, res, next) => {
     res.json({

@@ -63,7 +63,7 @@ const MenuDrawer = () => {
                 <span className='flex items-center justify-between gap-4'><HelpCenterIcon /><NavLink to='/mainpage/help'>Help?</NavLink></span>
                 <NavLink to='/mainpage/confirm'>Confirm</NavLink>
                 <Button onClick={handleLogout}>Log Out</Button>
-                <Button><NavLink to='/mainpage/orders'>Admin</NavLink></Button>
+                <Button><NavLink to='/mainpage/admin'>Admin</NavLink></Button>
             </List>
             <Divider />
             <List className='flex flex-col justify-around items-center gap-5'>

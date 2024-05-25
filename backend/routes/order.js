@@ -2,10 +2,7 @@ const express = require('express');
 const { PrismaClient } = require('@prisma/client');
 const router = express.Router();
 const prisma = new PrismaClient();
-// const cors = require('cors')
-// Middleware to parse JSON bodies
 router.use(express.json());
-// router.use(cors());
 prisma.$connect()
     .then(() => {
         console.log("Database Connected Successfully");
@@ -54,5 +51,20 @@ router.get('/getorders', async (req, res, next) => {
         console.log("An error Occurred", error)
     }
 })
+router.put('/updateorderstatus/:id', async (req, res, next) => {
+    const orderId = parseInt(req.params.id);
+    const { status } = req.body;
+
+    try {
+        const updatedOrder = await prisma.order.update({
+            where: { id: orderId },
+            data: { status: status }
+        });
+        res.json(updatedOrder);
+    } catch (error) {
+        next({ status: 500, message: "Error updating order status: " + error.message });
+        console.error(error);
+    }
+});
 
 module.exports = router;

@@ -101,7 +101,7 @@ function Navbar() {
                     MenuListProps={{ 'aria-labelledby': 'basic-button' }}
                 >
                     <MenuItem onClick={handleClose}>
-                        <NavLink to='/mainpage/orders'>Admin</NavLink>
+                        <NavLink to='/mainpage/admin'>Admin</NavLink>
                     </MenuItem>
                     <MenuItem onClick={() => { handleLogout(); handleClose(); }}>
                         LogOut
