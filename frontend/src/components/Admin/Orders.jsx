@@ -16,10 +16,20 @@ function Orders() {
         };
         getOrders();
     }, []);
-    const handleOrderStatus = async (orderId, isChecked) => {
+    const handleCheckboxChange = async (orderId) => {
+        const isChecked = completedOrderIds.has(orderId);
+        setCompletedOrderIds(prevCompletedOrderIds => {
+            const newCompletedOrderIds = new Set(prevCompletedOrderIds);
+            if (isChecked) {
+                newCompletedOrderIds.delete(orderId);
+            } else {
+                newCompletedOrderIds.add(orderId);
+            }
+            return newCompletedOrderIds;
+        });
+
         try {
-            const status = isChecked ? 'completed' : 'pending';
-            console.log("order id is ", orderId)
+            const status = isChecked ? 'pending' : 'completed'; // Toggle status
             const response = await axios.put(`https://mule-foods.onrender.com/orderapi/updateorderstatus/${orderId}`, { status });
             if (response.status === 200) {
                 setOrders(prevOrders => {
@@ -41,21 +51,11 @@ function Orders() {
     const totalQuantity = orders.reduce((sum, order) => sum + order.totalQuantity, 0);
     const totalCost = orders.reduce((sum, order) => sum + order.totalCost, 0);
 
-    const handleCheckboxChange = (orderId) => {
-        setCompletedOrderIds(prevCompletedOrderIds => {
-            const newCompletedOrderIds = new Set(prevCompletedOrderIds);
-            if (newCompletedOrderIds.has(orderId)) {
-                newCompletedOrderIds.delete(orderId);
-            } else {
-                newCompletedOrderIds.add(orderId);
-            }
-            return newCompletedOrderIds;
-        });
-    };
-    const totalOrders = orders.length;
 
+    const totalOrders = orders.length;
     const completedOrders = Array.from(completedOrderIds).length;
-    const pendingOrders = orders.length - completedOrders;
+    const pendingOrders = orders.filter(order => order.status !== "completed").length;
+
 
     // Helper function to get month name
     function getMonthName(monthIndex) {
@@ -115,7 +115,7 @@ function Orders() {
                                         <input
                                             type='checkbox'
                                             checked={completedOrderIds.has(order.id) || order.status === "completed"}
-                                            onChange={() => { handleCheckboxChange(order.id); handleOrderStatus(order.id, !completedOrderIds.has(order.id)); }}
+                                            onChange={() => { handleCheckboxChange(order.id); }}
                                         />
                                     </td>
                                 </tr>
