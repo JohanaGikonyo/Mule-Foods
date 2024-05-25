@@ -53,7 +53,7 @@ function Orders() {
 
 
     const totalOrders = orders.length;
-    const completedOrders = Array.from(completedOrderIds).length;
+    const completedOrders = orders.filter(order => order.status === "completed").length;
     const pendingOrders = orders.filter(order => order.status !== "completed").length;
 
 
