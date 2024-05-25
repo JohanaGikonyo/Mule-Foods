@@ -65,15 +65,33 @@ function Orders() {
 
     return (
         <div className="p-4">
-            <div>
-                <span className='flex flex-row gap-3 justify-around items-center'>
-                    <button>{totalOrders} Orders</button>
-                    <button>{completedOrders} Completed</button>
-                </span>
-                <span className='flex flex-row gap-3 justify-around items-center'>
-                    <button>{pendingOrders} Pending</button>
-                    <button>{orders.length - completedOrders - pendingOrders} Cancelled</button>
-                </span>
+            <h1 className='text-3xl font-semibold italic text-orange-900'>Welcome To The Admin Dashboard</h1>
+            <div className="flex gap-3 m-3 items-center justify-center ">
+                <div className='flex flex-col gap-2'>
+                    <div className="bg-gray-200 rounded-lg p-4 w-28 h-20 flex justify-center items-center">
+                        <button className="  font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            {totalOrders} Orders
+                        </button>
+                    </div>
+                    <div className="bg-gray-200 rounded-lg w-28 h-20 p-4 flex justify-center items-center">
+                        <button className="  font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            {pendingOrders} Pending Orders
+                        </button>
+                    </div>
+
+                </div>
+                <div className='flex flex-col gap-2'>
+                    <div className="bg-gray-200 rounded-lg p-4 w-28 h-20 flex justify-center items-center">
+                        <button className="  font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            {completedOrders} Completed
+                        </button>
+                    </div>
+                    <div className="bg-gray-200 rounded-lg p-4 w-28 h-20 flex justify-center items-center">
+                        <button className="  font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            {orders.length - completedOrders - pendingOrders} Cancelled
+                        </button>
+                    </div>
+                </div>
             </div>
             <div className="shadow-lg bg-white overflow-x-auto sm:rounded-lg w-full">
                 <table className="min-w-full divide-y divide-gray-200 border border-gray-300 table-auto">
@@ -126,7 +144,7 @@ function Orders() {
                 <h1 className="px-2 py-2 font-semibold border border-gray-300">Total Plates Ordered: {totalQuantity} Plates</h1>
                 <h1 className="px-2 py-2 font-semibold border border-gray-300">Total Cost: Kshs.{totalCost}</h1>
             </div>
-        </div>
+        </div >
     );
 }
 
