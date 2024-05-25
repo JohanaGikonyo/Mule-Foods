@@ -15,6 +15,24 @@ function Orders() {
             }
         };
         getOrders();
+
+        // Set up WebSocket connection
+        const socket = new WebSocket('wss://mule-foods.onrender.com');
+
+        socket.onmessage = (event) => {
+            const message = JSON.parse(event.data);
+            if (message.type === 'new_order') {
+                setOrders((prevOrders) => [...prevOrders, message.order]);
+            } else if (message.type === 'update_order') {
+                setOrders((prevOrders) => prevOrders.map(order => order.id === message.order.id ? message.order : order));
+            }
+        };
+
+        return () => {
+            socket.close();
+        };
+
+
     }, []);
     const handleCheckboxChange = async (orderId) => {
         const isChecked = completedOrderIds.has(orderId);
