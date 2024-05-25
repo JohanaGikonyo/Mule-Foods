@@ -114,7 +114,7 @@ function Orders() {
                                     <td className="px-2 py-2 whitespace-normal border border-gray-300">
                                         <input
                                             type='checkbox'
-                                            checked={completedOrderIds.has(order.id)}
+                                            checked={completedOrderIds.has(order.id) || order.status === "completed"}
                                             onChange={() => { handleCheckboxChange(order.id); handleOrderStatus(order.id, !completedOrderIds.has(order.id)); }}
                                         />
                                     </td>
