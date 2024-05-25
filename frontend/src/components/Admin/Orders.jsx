@@ -18,13 +18,10 @@ function Orders() {
     }, []);
     const handleOrderStatus = async (orderId, isChecked) => {
         try {
-            // Update the status based on isChecked value
             const status = isChecked ? 'completed' : 'pending';
 
-            // Send a request to update the order status
-            const response = await axios.put(`http://localhost:3000/orderapi/updateorderstatus/${orderId}`, { status });
+            const response = await axios.put(`https://mule-foods.onrender.com/orderapi/updateorderstatus/${orderId}`, { status });
             if (response.status === 200) {
-                // If the status update is successful, update the local state
                 setOrders(prevOrders => {
                     return prevOrders.map(order => {
                         if (order.id === orderId) {
@@ -39,6 +36,7 @@ function Orders() {
             console.error('Error updating order status:', error);
         }
     };
+
 
     const totalQuantity = orders.reduce((sum, order) => sum + order.totalQuantity, 0);
     const totalCost = orders.reduce((sum, order) => sum + order.totalCost, 0);

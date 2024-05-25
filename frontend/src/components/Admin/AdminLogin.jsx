@@ -42,7 +42,7 @@ function AdminLogin() {
         e.preventDefault();
         setCircularProgress(true);
         try {
-            const response = await axios.post('http://localhost:3000/admin/login', {
+            const response = await axios.post('https://mule-foods.onrender.com/admin/login', {
                 password,
                 email,
 
