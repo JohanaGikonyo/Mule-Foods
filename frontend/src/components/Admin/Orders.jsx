@@ -17,7 +17,11 @@ function Orders() {
         getOrders();
 
         // Set up WebSocket connection
-        const socket = new WebSocket('wss://mule-foods.onrender.com');
+        const socket = new WebSocket('https://mule-foods.onrender.com/orderapi/getorders');
+
+        socket.onopen = () => {
+            console.log('WebSocket connection established');
+        };
 
         socket.onmessage = (event) => {
             const message = JSON.parse(event.data);
@@ -26,6 +30,15 @@ function Orders() {
             } else if (message.type === 'update_order') {
                 setOrders((prevOrders) => prevOrders.map(order => order.id === message.order.id ? message.order : order));
             }
+        };
+
+
+        socket.onerror = (error) => {
+            console.error('WebSocket error:', error);
+        };
+
+        socket.onclose = () => {
+            console.log('WebSocket connection closed');
         };
 
         return () => {
