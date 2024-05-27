@@ -115,8 +115,8 @@ function Orders() {
                 </>
             )}
 
-            <div className="mt-4 px-4 py-2 border border-gray-300">
-                <h1 className="font-semibold">Total Plates Ordered: {totalQuantity} Plates</h1>
+            <div className="mt-4 px-4 py-2  border-gray-300 flex items-center gap-3">
+                <h1 className="font-semibold">Total  Ordered : {totalQuantity} plates</h1> |
                 <h1 className="font-semibold">Total Cost: Kshs.{totalCost}</h1>
             </div>
         </div>
