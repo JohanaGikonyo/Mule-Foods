@@ -1,9 +1,11 @@
-import axios from 'redaxios';
 import { useEffect, useState } from 'react';
+import axios from 'redaxios';
+import OrdersTableStructure from './OrdersTableStructure';
 
 function Orders() {
     const [orders, setOrders] = useState([]);
     const [completedOrderIds, setCompletedOrderIds] = useState(new Set());
+    const [table, setTable] = useState("pending");
 
     useEffect(() => {
         const getOrders = async () => {
@@ -17,7 +19,7 @@ function Orders() {
         getOrders();
 
         // Set up WebSocket connection
-        const socket = new WebSocket('https://mule-foods.onrender.com/orderapi/getorders');
+        const socket = new WebSocket('wss://mule-foods.onrender.com/orderapi/socket');
 
         socket.onopen = () => {
             console.log('WebSocket connection established');
@@ -32,7 +34,6 @@ function Orders() {
             }
         };
 
-
         socket.onerror = (error) => {
             console.error('WebSocket error:', error);
         };
@@ -44,9 +45,8 @@ function Orders() {
         return () => {
             socket.close();
         };
-
-
     }, []);
+
     const handleCheckboxChange = async (orderId) => {
         const isChecked = completedOrderIds.has(orderId);
         setCompletedOrderIds(prevCompletedOrderIds => {
@@ -78,113 +78,61 @@ function Orders() {
         }
     };
 
+    const pendingOrders = orders.filter(order => order.status !== "completed");
+    const completedOrders = orders.filter(order => order.status === "completed");
 
     const totalQuantity = orders.reduce((sum, order) => sum + order.totalQuantity, 0);
     const totalCost = orders.reduce((sum, order) => sum + order.totalCost, 0);
 
-
-    const totalOrders = orders.length;
-    const completedOrders = orders.filter(order => order.status === "completed").length;
-    const pendingOrders = orders.filter(order => order.status !== "completed").length;
-
-
-    // Helper function to get month name
-    function getMonthName(monthIndex) {
-        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        return monthNames[monthIndex];
-    }
-
     return (
         <div className="p-4">
-            <h1 className=' italic text-orange-900'>Welcome To The Admin Dashboard</h1>
-            <div className="flex gap-3 m-3 items-center justify-center ">
+            <h1 className='italic text-orange-900'>Welcome To The Admin Dashboard</h1>
+            <div className="flex gap-3 m-3 items-center justify-center">
                 <div className='flex flex-col gap-2'>
                     <div className="bg-gray-200 rounded-lg p-4 w-28 h-20 flex justify-center items-center">
-                        <button className="  font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                            {totalOrders} Orders
+                        <button className="font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            {orders.length} Orders
                         </button>
                     </div>
-                    <div className="bg-gray-200 rounded-lg w-28 h-20 p-4 flex justify-center items-center">
-                        <button className="  font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                            {pendingOrders} Pending Orders
+                    <div className="bg-gray-200 rounded-lg w-28 h-20 p-4 flex justify-center items-center" onClick={() => { setTable("pending") }} >
+                        <button className="font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            {pendingOrders.length} Pending Orders
                         </button>
                     </div>
-
                 </div>
                 <div className='flex flex-col gap-2'>
-                    <div className="bg-gray-200 rounded-lg p-4 w-28 h-20 flex justify-center items-center">
-                        <button className="  font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                            {completedOrders} Completed
+                    <div className="bg-gray-200 rounded-lg p-4 w-28 h-20 flex justify-center items-center" onClick={() => { setTable("complete") }}>
+                        <button className="font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            {completedOrders.length} Completed
                         </button>
                     </div>
                     <div className="bg-gray-200 rounded-lg p-4 w-28 h-20 flex justify-center items-center">
-                        <button className="  font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                            {orders.length - completedOrders - pendingOrders} Cancelled
+                        <button className="font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            {orders.length - completedOrders.length - pendingOrders.length} Cancelled
                         </button>
                     </div>
                 </div>
             </div>
-            <div className="shadow-lg bg-white overflow-x-auto sm:rounded-lg w-full">
-                <div className="inline-block min-w-full">
-                    <div className="overflow-x-auto">
-                        <table className="min-w-full divide-y divide-gray-200 border border-gray-300 table-auto">
-                            <thead className="bg-gray-50">
-                                <tr>
-                                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border border-gray-300">No.</th>
-                                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border border-gray-300">UserName</th>
-                                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border border-gray-300">Products</th>
-                                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-40 border border-gray-300">Location</th>
-                                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border border-gray-300">Time</th>
-                                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border border-gray-300">Check</th>
-                                </tr>
-                            </thead>
-                            <tbody className="bg-white divide-y divide-gray-200">
-                                {orders.map((order) => {
-                                    const orderDate = new Date(order.createdAt);
 
-                                    // Format the date
-                                    const formattedDate = `${orderDate.getDate()} ${getMonthName(orderDate.getMonth())} ${orderDate.getFullYear()}`;
+            {table === "pending" && (
+                <>
+                    <h2 className="text-lg font-semibold mt-4">Pending Orders</h2>
+                    <OrdersTableStructure orderList={pendingOrders} completedOrderIds={completedOrderIds} handleCheckboxChange={handleCheckboxChange} />
+                </>
+            )}
 
-                                    // Format the time
-                                    const hours = orderDate.getHours() % 12 || 12; // Convert to 12-hour format
-                                    const minutes = orderDate.getMinutes().toString().padStart(2, '0');
-                                    const amOrPm = orderDate.getHours() < 12 ? 'AM' : 'PM';
-                                    const formattedTime = `${hours}:${minutes} ${amOrPm}`;
+            {table === "complete" && (
+                <>
+                    <h2 className="text-lg font-semibold mt-4">Completed Orders</h2>
+                    <OrdersTableStructure orderList={completedOrders} completedOrderIds={completedOrderIds} handleCheckboxChange={handleCheckboxChange} />
+                </>
+            )}
 
-                                    return (
-                                        <tr key={order.id}>
-                                            <td className="px-4 py-2 align-text-top border border-gray-300 whitespace-nowrap">{order.id}</td>
-                                            <td className="px-4 py-2 align-text-top border border-gray-300 whitespace-nowrap">{order.name}</td>
-                                            <td className="px-4 py-2 align-text-top border border-gray-300 max-w-sm whitespace-nowrap break-words">
-                                                {JSON.parse(order.products).map((item) => (
-                                                    <div key={item.productName}>{item.productName} - {item.quantity} plates</div>
-                                                ))}
-                                            </td>
-                                            <td className="px-4 py-2 border border-gray-300  whitespace-nowrap w-72 break-words">{order.location}</td>
-                                            <td className="px-4 py-2 border border-gray-300 whitespace-nowrap">{formattedDate} {formattedTime}</td>
-                                            <td className="px-4 py-2 border border-gray-300 whitespace-nowrap">
-                                                <input
-                                                    type='checkbox'
-                                                    checked={completedOrderIds.has(order.id) || order.status === "completed"}
-                                                    onChange={() => { handleCheckboxChange(order.id); }}
-                                                />
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div className="mt-4 px-4 py-2 border border-gray-300">
-                    <h1 className="font-semibold">Total Plates Ordered: {totalQuantity} Plates</h1>
-                    <h1 className="font-semibold">Total Cost: Kshs.{totalCost}</h1>
-                </div>
+            <div className="mt-4 px-4 py-2 border border-gray-300">
+                <h1 className="font-semibold">Total Plates Ordered: {totalQuantity} Plates</h1>
+                <h1 className="font-semibold">Total Cost: Kshs.{totalCost}</h1>
             </div>
-
-
-
-        </div >
+        </div>
     );
 }
 
