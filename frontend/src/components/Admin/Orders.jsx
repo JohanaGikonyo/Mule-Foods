@@ -102,7 +102,7 @@ function Orders() {
             </div>
 
             {
-                (table === "pending" || table === "cancel") && (
+                (table === "pending") && (
                     <>
                         {/* <h2 className="text-lg font-semibold mt-4">Pending Orders</h2> */}
                         <OrdersTableStructure orderList={pendingOrders} completedOrderIds={completedOrderIds} handleCheckboxChange={handleCheckboxChange} />
@@ -123,6 +123,13 @@ function Orders() {
                     <>
                         {/* <h2 className="text-lg font-semibold mt-4">Completed Orders</h2> */}
                         <OrdersTableStructure orderList={orders} completedOrderIds={completedOrderIds} handleCheckboxChange={handleCheckboxChange} />
+                    </>
+                )
+            }
+            {
+                table === "cancel" && (
+                    <>
+                        <h2 className="text-lg font-semibold mt-4">No cancelled Orders!</h2>
                     </>
                 )
             }
