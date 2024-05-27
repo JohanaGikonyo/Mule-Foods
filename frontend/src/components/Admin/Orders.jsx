@@ -103,14 +103,14 @@ function Orders() {
 
             {table === "pending" && (
                 <>
-                    <h2 className="text-lg font-semibold mt-4">Pending Orders</h2>
+                    {/* <h2 className="text-lg font-semibold mt-4">Pending Orders</h2> */}
                     <OrdersTableStructure orderList={pendingOrders} completedOrderIds={completedOrderIds} handleCheckboxChange={handleCheckboxChange} />
                 </>
             )}
 
             {table === "complete" && (
                 <>
-                    <h2 className="text-lg font-semibold mt-4">Completed Orders</h2>
+                    {/* <h2 className="text-lg font-semibold mt-4">Completed Orders</h2> */}
                     <OrdersTableStructure orderList={completedOrders} completedOrderIds={completedOrderIds} handleCheckboxChange={handleCheckboxChange} />
                 </>
             )}
