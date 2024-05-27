@@ -21,9 +21,6 @@ function Orders() {
         // Set up WebSocket connection
         const socket = new WebSocket('wss://mule-foods.onrender.com/orderapi/socket');
 
-        socket.onopen = () => {
-            console.log('WebSocket connection established');
-        };
 
         socket.onmessage = (event) => {
             const message = JSON.parse(event.data);
@@ -34,17 +31,7 @@ function Orders() {
             }
         };
 
-        socket.onerror = (error) => {
-            console.error('WebSocket error:', error);
-        };
 
-        socket.onclose = () => {
-            console.log('WebSocket connection closed');
-        };
-
-        return () => {
-            socket.close();
-        };
     }, []);
 
     const handleCheckboxChange = async (orderId) => {
@@ -60,7 +47,7 @@ function Orders() {
         });
 
         try {
-            const status = isChecked ? 'pending' : 'completed'; // Toggle status
+            const status = isChecked ? 'pending' : 'completed';// Determine the new status based on the current checkbox state
             const response = await axios.put(`https://mule-foods.onrender.com/orderapi/updateorderstatus/${orderId}`, { status });
             if (response.status === 200) {
                 setOrders(prevOrders => {
