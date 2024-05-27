@@ -76,24 +76,24 @@ function Orders() {
             <h1 className='italic text-orange-900'>Welcome To The Admin Dashboard</h1>
             <div className="flex gap-3 m-3 items-center justify-center">
                 <div className='flex flex-col gap-2'>
-                    <div className="bg-gray-200 rounded-lg p-4 w-28 h-20 flex justify-center items-center">
+                    <div className={`bg-gray-200 rounded-lg p-4 w-28 h-20 flex justify-center items-center${table === 'totalorders' ? " bg-orange-400 text-white" : ""}`} onClick={() => { setTable("totalorders") }}>
                         <button className="font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                             {orders.length} Orders
                         </button>
                     </div>
-                    <div className="bg-gray-200 rounded-lg w-28 h-20 p-4 flex justify-center items-center" onClick={() => { setTable("pending") }} >
+                    <div className={`bg-gray-200 rounded-lg w-28 h-20 p-4 flex justify-center items-center ${table === 'pending' ? "bg-orange-400 text-white" : ""}`} onClick={() => { setTable("pending") }} >
                         <button className="font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                             {pendingOrders.length} Pending Orders
                         </button>
                     </div>
                 </div>
                 <div className='flex flex-col gap-2'>
-                    <div className="bg-gray-200 rounded-lg p-4 w-28 h-20 flex justify-center items-center" onClick={() => { setTable("complete") }}>
+                    <div className={`bg-gray-200 rounded-lg p-4 w-28 h-20 flex justify-center items-center ${table === 'complete' ? " bg-orange-400 text-white" : ""}`} onClick={() => { setTable("complete") }}>
                         <button className="font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                             {completedOrders.length} Completed
                         </button>
                     </div>
-                    <div className="bg-gray-200 rounded-lg p-4 w-28 h-20 flex justify-center items-center">
+                    <div className={`bg-gray-200 rounded-lg p-4 w-28 h-20 flex justify-center items-center ${table === 'cancel' ? " bg-orange-400 text-white" : ""}`} onClick={() => { setTable("cancel") }}>
                         <button className="font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                             {orders.length - completedOrders.length - pendingOrders.length} Cancelled
                         </button>
@@ -101,25 +101,37 @@ function Orders() {
                 </div>
             </div>
 
-            {table === "pending" && (
-                <>
-                    {/* <h2 className="text-lg font-semibold mt-4">Pending Orders</h2> */}
-                    <OrdersTableStructure orderList={pendingOrders} completedOrderIds={completedOrderIds} handleCheckboxChange={handleCheckboxChange} />
-                </>
-            )}
+            {
+                (table === "pending" || table === "cancel") && (
+                    <>
+                        {/* <h2 className="text-lg font-semibold mt-4">Pending Orders</h2> */}
+                        <OrdersTableStructure orderList={pendingOrders} completedOrderIds={completedOrderIds} handleCheckboxChange={handleCheckboxChange} />
+                    </>
+                )
+            }
 
-            {table === "complete" && (
-                <>
-                    {/* <h2 className="text-lg font-semibold mt-4">Completed Orders</h2> */}
-                    <OrdersTableStructure orderList={completedOrders} completedOrderIds={completedOrderIds} handleCheckboxChange={handleCheckboxChange} />
-                </>
-            )}
+            {
+                table === "complete" && (
+                    <>
+                        {/* <h2 className="text-lg font-semibold mt-4">Completed Orders</h2> */}
+                        <OrdersTableStructure orderList={completedOrders} completedOrderIds={completedOrderIds} handleCheckboxChange={handleCheckboxChange} />
+                    </>
+                )
+            }
+            {
+                table === "totalorders" && (
+                    <>
+                        {/* <h2 className="text-lg font-semibold mt-4">Completed Orders</h2> */}
+                        <OrdersTableStructure orderList={orders} completedOrderIds={completedOrderIds} handleCheckboxChange={handleCheckboxChange} />
+                    </>
+                )
+            }
 
             <div className="mt-4 px-4 py-2  border-gray-300 flex items-center gap-3">
                 <h1 className="font-semibold">Total  Ordered : {totalQuantity} plates</h1> |
                 <h1 className="font-semibold">Total Cost: Kshs.{totalCost}</h1>
             </div>
-        </div>
+        </div >
     );
 }
 
