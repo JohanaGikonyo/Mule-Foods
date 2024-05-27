@@ -66,16 +66,19 @@ const MenuDrawer = () => {
                 <Button><NavLink to='/mainpage/admin'>Admin</NavLink></Button>
             </List>
             <Divider />
-            <List className='flex flex-col justify-around items-center gap-5'>
-                <span className='flexh items-center justify-between gap-4'><span>      <Avatar
-                    sx={{ bgcolor: deepOrange[500] }}
-                    alt={`${email.toUpperCase()}`}
-                    src="/broken-image.jpg"
-                />
-                </span><Button><NavLink to="/mainpage/account">Account</NavLink></Button></span>
+            <div className='flex flex-col justify-around items-center gap-5'>
+                <div className='flex flex-row items-center justify-around'>
+                    <span className='flexh items-center justify-between gap-4'><span>      <Avatar
+                        sx={{ bgcolor: deepOrange[500] }}
+                        alt={`${email.toUpperCase()}`}
+                        src="/broken-image.jpg"
+                    />
+                    </span>
+                        <Button><NavLink to="/mainpage/account">Account</NavLink></Button></span>
+                </div>
                 <small>{email}</small>
 
-            </List>
+            </div>
 
         </Box >
     );
