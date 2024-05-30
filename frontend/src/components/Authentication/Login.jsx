@@ -72,7 +72,7 @@ function Login() {
                         {circularProgress ? (
                             <div className='w-[100%] rounded-md bg-slate-100 z-30'>
                                 <Button className='font-bold p-1 rounded-md flex items-center gap-1'>
-                                    <span className='p-3'><CircularProgress /></span>Please Wait...
+                                    <span className='p-3'><CircularProgress size={20} /></span>Please Wait...
                                 </Button>
                             </div>
                         ) : (

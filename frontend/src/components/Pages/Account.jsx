@@ -142,7 +142,7 @@ function Account() {
                     <div>
                         {circularProgress ? (
                             <div className='w-[100%]  rounded-md bg-slate-100 z-30'>
-                                <Button className='font-bold p-1  rounded-md flex items-center gap-1'><span className='p-3'> <CircularProgress /></span>In Progress. Please Wait...</Button>
+                                <Button className='font-bold p-1  rounded-md flex items-center gap-1'><span className='p-3'> <CircularProgress size={20} /></span>In Progress. Please Wait...</Button>
                             </div>
                         ) : (
                             <Button type='submit' className='border border-orange-400 p-1 px-3 rounded-md flex items-center gap-1' > Update </Button>
