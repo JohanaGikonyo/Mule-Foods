@@ -136,9 +136,9 @@ function Cart() {
                                 <td className="px-1 py-2 md:px-6 md:py-3 whitespace-wrap border border-gray-300">{item.itemName}</td>
                                 <td className="px-1 py-2 md:px-6 md:py-3 whitespace-nowrap border border-gray-300">{item.itemQuantity}</td>
                                 <td className="px-1 py-2 md:px-6 md:py-3 whitespace-nowrap border border-gray-300">Kshs.{item.itemCost}</td>
-                                <td className="px-1 py-2 md:px-6 md:py-3 whitespace-nowrap border border-gray-300 flex justify-around">
+                                <td className="px-1 py-2 md:px-6 md:py-3 whitespace-nowrap   border-gray-300 flex justify-around">
                                     <button
-                                        className="text-blue-400 font-extrabold rounded-full p-1"
+                                        className="text-blue-400 font-extrabold rounded-full p-1 border-none"
                                         onClick={() => { handleDecrement(item.itemName) }}
                                         disabled={item.itemQuantity < 1}
                                     >
@@ -146,7 +146,7 @@ function Cart() {
                                     </button>
 
                                     <button
-                                        className="text-blue-400 font-extrabold rounded-full p-1 ml-1"
+                                        className="text-blue-400 font-extrabold rounded-full p-1 ml-1 border-none"
                                         onClick={() => { handleIncrement(item.itemName) }}
                                     >
                                         <AddIcon fontSize="small" />
