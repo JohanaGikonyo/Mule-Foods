@@ -7,7 +7,7 @@ function Footer() {
         <div className='mt-10'>
             <Divider />
             <div className='flex justify-between items-center p-5 gap-2'>
-                <small className='text-black flex flex-col items-start justify-around'><NavLink to='mainpage/home' className='flex text-black'><span className='text-orange-400 flex'>Mule </span> Foods</NavLink><span className='italic'>Faster than a phone Call</span> </small>
+                <small className='text-black flex flex-col items-start justify-around italic'><NavLink to='mainpage/home' className='flex text-black'><span className='text-orange-400 flex'>Mule </span> Foods</NavLink><span className='italic'>Faster than a phone Call</span> </small>
                 <small className='flex items-center justify-around'>
                     <CopyrightIcon size={5} />copyright{new Date().getFullYear()}
                 </small>
