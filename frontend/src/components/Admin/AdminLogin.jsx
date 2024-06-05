@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, TextField, CircularProgress, Button, Snackbar, Alert, AlertTitle } from '@mui/material';
+import { Box, TextField, CircularProgress, Snackbar, Alert, AlertTitle } from '@mui/material';
 import Input from '@mui/material/Input';
 import IconButton from '@mui/material/IconButton';
 import InputLabel from '@mui/material/InputLabel';
@@ -119,13 +119,15 @@ function AdminLogin() {
                 <div>
                     {circularProgress ? (
                         <div className='w-[100%] rounded-md bg-slate-100 z-30'>
-                            <Button className='font-bold p-1 rounded-md flex items-center gap-1'>
-                                <span className='p-3'><CircularProgress /></span>Please Wait...
-                            </Button>
+                            <button className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md flex items-center gap-2'>
+                                <CircularProgress sx={{ color: "white" }} size={20} />
+                                <span>Please Wait...</span>
+                            </button>
                         </div>
                     ) : (
-                        <Button type='submit' className='border border-orange-400 p-1 px-3 rounded-md flex items-center gap-1'>Log In</Button>
-                    )}<br />
+                        <button className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md flex items-center gap-2'>
+                            <span>LogIn</span>
+                        </button>)}<br />
                     <small className='text-blue-500'><NavLink to='/mainpage/help'>Having Trouble? Contact Support</NavLink></small>
                 </div>
             </form >

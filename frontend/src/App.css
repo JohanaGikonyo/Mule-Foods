@@ -15,11 +15,11 @@
   color: orange;
 }
 
-.links a {
+.links .navlink {
   position: relative;
 }
 
-.links a::after {
+.links .navlink::after {
   content: "";
   position: absolute;
   height: 2px;
@@ -30,12 +30,12 @@
   transition: 0.3s;
 }
 
-.links a:hover {
+.links .navlink:hover {
   letter-spacing: 3px;
   font-size: larger;
 }
 
-.links a:hover::after {
+.links .navlink:hover::after {
   width: 100%;
 
 }

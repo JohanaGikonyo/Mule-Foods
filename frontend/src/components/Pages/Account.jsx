@@ -3,7 +3,6 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import { useEffect, useState } from 'react';
 import { AlertTitle, CircularProgress } from '@mui/material';
-import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import axios from 'redaxios'
@@ -72,6 +71,7 @@ function Account() {
 
         catch (error) {
             console.error("An error occured", error)
+            setFailAlert(prev => !prev)
             console.log(error)
         }
     }
@@ -142,11 +142,14 @@ function Account() {
                     <div>
                         {circularProgress ? (
                             <div className='w-[100%]  rounded-md bg-slate-100 z-30'>
-                                <Button className='font-bold p-1  rounded-md flex items-center gap-1'><span className='p-3'> <CircularProgress size={20} /></span>In Progress. Please Wait...</Button>
-                            </div>
+                                <button className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md flex items-center gap-2'>
+                                    <CircularProgress sx={{ color: "white" }} size={20} />
+                                    <span>Please Wait...</span>
+                                </button>                            </div>
                         ) : (
-                            <Button type='submit' className='border border-orange-400 p-1 px-3 rounded-md flex items-center gap-1' > Update </Button>
-
+                            <button className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md flex items-center gap-2'>
+                                <span>Update</span>
+                            </button>
                         )}
 
                     </div>

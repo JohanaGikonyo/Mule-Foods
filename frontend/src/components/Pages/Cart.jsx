@@ -9,7 +9,6 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { AlertTitle, CircularProgress } from '@mui/material';
-import Button from '@mui/material/Button';
 import { jwtDecode } from 'jwt-decode'; // Corrected import
 import { useAuthStore } from "../Store/Store";
 import axios from 'redaxios';
@@ -164,7 +163,7 @@ function Cart() {
                     </tbody>
                 </table>
             </div>
-            <div className="flex gap-3 mt-10">
+            <div className="flex items-center justify-around gap-3 mt-10">
                 <div className="mt-10 mb-10">
                     <button className="px-2 py-1 border border-orange-400 rounded-md">
                         <NavLink to='/mainpage/home' className="flex flex-row"><span className="text-blue-500"><ArrowBackIcon /> </span>Back</NavLink>
@@ -174,12 +173,14 @@ function Cart() {
                 <div>
                     {circularProgress ? (
                         <div className='w-[100%] rounded-md bg-slate-100 z-30'>
-                            <Button className='font-bold p-1 rounded-md flex items-center gap-1'><span className='p-3'><CircularProgress /></span>Please Wait...</Button>
-                        </div>
+                            <button className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md flex items-center gap-2'>
+                                <CircularProgress sx={{ color: "white" }} size={20} />
+                                <span>Please Wait...</span>
+                            </button>                          </div>
                     ) : (
                         <div className="mt-10 mb-10">
-                            <button className="px-1 py-1 border border-orange-400 rounded-md">
-                                <button className="flex flex-row" onClick={handleCompleteOrder}>Complete <span className="text-blue-500"><ArrowForwardIcon /></span></button>
+                            <button className="px-1 py-1  rounded-md">
+                                <button className="flex flex-row bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md  items-center gap-2" onClick={handleCompleteOrder}>Complete <span className="text-white"><ArrowForwardIcon /></span> </button>
                             </button>
                         </div>)}
                 </div>

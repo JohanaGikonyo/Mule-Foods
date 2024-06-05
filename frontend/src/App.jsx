@@ -9,6 +9,7 @@ import Account from './components/Pages/Account';
 import Cart from './components/Pages/Cart';
 import Orders from './components/Admin/Orders';
 import Navbar from './components/navbar/Navbar';
+import Footer from './components/Footer/Footer';
 import { useAuthStore } from './components/Store/Store';
 import './App.css';
 import AdminLogin from './components/Admin/AdminLogin';
@@ -16,8 +17,10 @@ import AdminLogin from './components/Admin/AdminLogin';
 function App() {
   const token = useAuthStore((state) => state.token);
   return (
-    <div className=''>
-      <Routes>
+    <div >
+
+
+      <Routes >
         {/* Redirect to main page if user is authenticated */}
         {token && <Route path='/' element={<Navigate to='/mainpage/home' />} />}
 
@@ -26,26 +29,32 @@ function App() {
         <Route path='/' element={<SignIn />} />
         <Route path='/login' element={<Login />} />
       </Routes>
-    </div>
+
+
+
+    </div >
   );
 }
 
 function MainPageRoutes() {
   return (
-    <>
+    <div className='flex flex-col min-h-screen '>
       <Navbar />
-      <Outlet />
-      <Routes>
-        <Route path='/*' element={<Home />} />
-        <Route path='/home' element={<Home />} />
-        <Route path='/help' element={<Help />} />
-        <Route path='/cart' element={<Cart />} />
-        <Route path='/confirm' element={<Confirmation />} />
-        <Route path='/account' element={<Account />} />
-        <Route path='/orders' element={<Orders />} />
-        <Route path='/admin' element={<AdminLogin />} />
-      </Routes >
-    </>
+      <main className='flex-grow'>
+        <Outlet />
+        <Routes>
+          <Route path='/*' element={<Home />} />
+          <Route path='/home' element={<Home />} />
+          <Route path='/help' element={<Help />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/confirm' element={<Confirmation />} />
+          <Route path='/account' element={<Account />} />
+          <Route path='/orders' element={<Orders />} />
+          <Route path='/admin' element={<AdminLogin />} />
+        </Routes >
+      </main>
+      <Footer />
+    </div>
   );
 }
 

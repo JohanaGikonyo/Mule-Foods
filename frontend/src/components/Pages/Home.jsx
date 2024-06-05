@@ -85,7 +85,7 @@ function Homes() {
                         </div>
                     ))}
                 </div>
-                <div className="mt-5 text-center">
+                <div className="mt-10 text-center">
                     <NavLink to='/mainpage/help' className="border p-2 border-orange-400 rounded-md">Help Center</NavLink>
                 </div>
             </div>

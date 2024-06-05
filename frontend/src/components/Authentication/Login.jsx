@@ -9,6 +9,11 @@ function Login() {
     const [circularProgress, setCircularProgress] = useState(false);
     const [failAlert, setFailAlert] = useState(false);
     const setToken = useAuthStore((state) => state.setToken);
+    const [state] = useState({
+        vertical: 'top',
+        horizontal: 'center',
+    });
+    const { vertical, horizontal } = state;
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -36,7 +41,7 @@ function Login() {
 
     return (
         <div>
-            <Snackbar open={failAlert} autoHideDuration={5000} onClose={handleFailClose}>
+            <Snackbar open={failAlert} autoHideDuration={5000} onClose={handleFailClose} anchorOrigin={{ vertical, horizontal }}>
                 <Alert onClose={handleFailClose} severity="error" variant="filled" sx={{ width: '100%' }}>
                     <AlertTitle>Failed</AlertTitle>
                     Failed! Try Again or SignIn.
