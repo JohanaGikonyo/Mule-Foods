@@ -8,7 +8,7 @@ function Orders() {
     const [table, setTable] = useState("pending");
 
     useEffect(() => {
-        const getOrders = async () => {
+        const fetchData = async () => {
             try {
                 const response = await axios.get('https://mule-foods.onrender.com/orderapi/getorders');
                 setOrders(response.data);
@@ -16,11 +16,12 @@ function Orders() {
                 console.error(error);
             }
         };
-        getOrders();
 
-        // Set up WebSocket connection
         const socket = new WebSocket('wss://mule-foods.onrender.com/orderapi/socket');
 
+        socket.onopen = () => {
+            console.log('WebSocket connection established.');
+        };
 
         socket.onmessage = (event) => {
             const message = JSON.parse(event.data);
@@ -31,7 +32,12 @@ function Orders() {
             }
         };
 
+        const intervalId = setInterval(fetchData, 5000); // Fetch data every 5 seconds
 
+        return () => {
+            clearInterval(intervalId); // Clean up interval on component unmount
+            socket.close(); // Close WebSocket connection on component unmount
+        };
     }, []);
 
     const handleCheckboxChange = async (orderId) => {
