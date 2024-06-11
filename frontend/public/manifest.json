@@ -1,6 +1,12 @@
 {
-    "short_name": "FoodApp",
-    "name": "My Food App",
+    "theme_color": "#ffffff",
+    "background_color": "#000000",
+    "orientation": "any",
+    "display": "standalone",
+    "dir": "auto",
+    "lang": "en-US",
+    "name": "mule foods",
+    "short_name": "mule foods app",
     "icons": [
         {
             "src": "favicon.ico",
@@ -16,10 +22,22 @@
             "src": "logo512.png",
             "type": "image/png",
             "sizes": "512x512"
+        },
+        {
+            "src": "logo256.png",
+            "type": "image/png",
+            "sizes": "256x256"
+        },
+        {
+            "src": "logo384.png",
+            "type": "image/png",
+            "sizes": "384x384"
+        },
+        {
+            "src": "maskable_icon.png",
+            "type": "image/png",
+            "sizes": "192x192",
+            "purpose": "any maskable"
         }
-    ],
-    "start_url": ".",
-    "display": "standalone",
-    "theme_color": "#000000",
-    "background_color": "#ffffff"
+    ]
 }
