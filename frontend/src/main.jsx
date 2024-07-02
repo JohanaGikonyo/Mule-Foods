@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
-import { register as registerServiceWorker } from "./serviceWorkerRegistration";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration"; // Import the module correctly
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -13,7 +13,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   </React.StrictMode>
 );
 
-// Change `unregister()` to `register()`
-if (import.meta.env.MODE === "production") {
-  registerServiceWorker();
-}
+// Register the service worker
+serviceWorkerRegistration.register();

@@ -1,9 +1,9 @@
 const CACHE_NAME = "my-app-cache";
 const urlsToCache = [
   "/",
-  "/index.html",
-  "/styles.css",
-  "/main.js",
+  "./index.html",
+  "/index.css",
+  "/main.jsx",
   // Add more URLs of assets you want to cache
 ];
 

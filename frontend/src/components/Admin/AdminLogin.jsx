@@ -46,7 +46,11 @@ function AdminLogin() {
                 password,
                 email,
 
-            });
+            }, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              });
 
             if (response.data === "authorized") {
                 setCircularProgress(false);

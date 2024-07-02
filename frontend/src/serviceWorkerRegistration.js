@@ -14,7 +14,7 @@ export function register(config) {
     }
 
     window.addEventListener("load", () => {
-      const swUrl = `${import.meta.env.VITE_PUBLIC_URL}/service-worker.js`;
+      const swUrl = `${import.meta.env.VITE_PUBLIC_URL}/service-worker.js`; // Adjust path as per your project structure
 
       if (isLocalhost) {
         checkValidServiceWorker(swUrl, config);
