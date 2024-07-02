@@ -1,33 +1,36 @@
-const express = require('express')
-require('dotenv').config()
-const morgan = require('morgan');
-const cors = require('cors')
-const app = express()
+const express = require("express");
+require("dotenv").config();
+const morgan = require("morgan");
+const cors = require("cors");
+const app = express();
+
 const corsOptions = {
-    origin: ['https://mule-foods.vercel.app', 'http://localhost:5173', 'https://mulefoods.com'],
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-    optionSuccessStatus: 200
+  origin: ["https://mule-foods.vercel.app", "http://localhost:5173", "http://mulefoods.com"],
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  optionsSuccessStatus: 200,
 };
 
-//middlewares
-app.use(express.json())
+// Middlewares
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 app.use(cors(corsOptions));
 
-app.use('/api', require('./routes/api.route'))
-app.use('/orderapi', require('./routes/order'))
-app.use('/admin', require('./routes/admin'))
+// Handle Preflight Requests
+app.options("*", cors(corsOptions));
 
-app.get('/', async (req, res, next) => {
-    res.json({
-        message: "Server Is running Here!"
-    })
-})
+// Define routes
+app.use("/api", require("./routes/api.route"));
+app.use("/orderapi", require("./routes/order"));
+app.use("/admin", require("./routes/admin"));
 
-const Port = process.env.PORT || 3001
+app.get("/", async (req, res) => {
+  res.json({
+    message: "Server Is running Here!",
+  });
+});
 
-app.listen(Port, () => console.log(`App running at port ${Port}`))
+const Port = process.env.PORT || 3001;
 
-
+app.listen(Port, () => console.log(`App running at port ${Port}`));
