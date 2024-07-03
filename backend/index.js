@@ -9,6 +9,7 @@ const corsOptions = {
     "http://mulefoods.com",
     "https://mulefoods.com",
     "https://mulefoods.vercel.app",
+    "https://www.mulefoods.com",
     "https://mule-foods.vercel.app",
     "http://localhost:5173",
   ],
