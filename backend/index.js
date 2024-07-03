@@ -5,7 +5,7 @@ const cors = require("cors");
 const app = express();
 
 const corsOptions = {
-  origin: ["http://mulefoods.com", "https://mule-foods.vercel.app", "http://localhost:5173"],
+  origin: ["https://mulefoods.com", "https://mulefoods.vercel.app", "http://localhost:5173"],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   optionsSuccessStatus: 200,
@@ -25,7 +25,7 @@ app.use("/api", require("./routes/api.route"));
 app.use("/orderapi", require("./routes/order"));
 app.use("/admin", require("./routes/admin"));
 
-app.get("/", async (req, res) => {
+app.get("/", (req, res) => {
   res.json({
     message: "Server Is running Here!",
   });
