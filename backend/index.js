@@ -5,7 +5,7 @@ const cors = require("cors");
 const app = express();
 
 const corsOptions = {
-  origin: ["https://mule-foods.vercel.app", "http://localhost:5173", "http://mulefoods.com"],
+  origin: ["http://mulefoods.com", "https://mule-foods.vercel.app", "http://localhost:5173"],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   optionsSuccessStatus: 200,
