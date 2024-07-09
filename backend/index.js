@@ -7,6 +7,7 @@ const app = express();
 const corsOptions = {
   origin: [
     "http://mulefoods.com",
+    "http://www.mulefoods.com",
     "https://mulefoods.com",
     "https://mulefoods.vercel.app",
     "https://www.mulefoods.com",
